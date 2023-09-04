@@ -17,7 +17,7 @@ import { FaFacebookF } from "react-icons/fa";
 function Footer() {
   return (
     <div className="bg-gray-800 text-white ">
-      <div className="bg-mainDarkRed">
+      <div className="bg-mainBlack2">
         <section className="flex container justify-between p-4 ">
           <div className="mr-5">
             <span>Get connected with us on social networks:</span>

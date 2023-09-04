@@ -39,9 +39,9 @@ const Navbar = () => {
               } lg:h-fit overflow-hidden flex flex-col justify-center w-full items-center gap-5 absolute top-[65px] left-0 lg:relative lg:top-auto lg:left-auto lg:w-fit lg:justify-start lg:flex-row bg-mainBlack2 lg:bg-transparent lg:pb-0 duration-300 `}
             >
               <Link
-                href={"/"}
+                href={"/movies"}
                 className={`font-semibold hover:text-mainDarkRed duration-300 ${
-                  pathname === "/" ? "text-mainDarkRed" : ""
+                  pathname === "/movies" ? "text-mainDarkRed" : ""
                 }`}
               >
                 Movies

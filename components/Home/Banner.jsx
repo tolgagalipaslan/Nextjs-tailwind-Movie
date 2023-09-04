@@ -27,7 +27,7 @@ const Banner = () => {
         className="w-full h-screen  max-h-[1200px] home-banner"
       >
         <SwiperSlide>
-          <div className="w-full h-full relative">
+          <div className="w-full h-full relative  ">
             <div className="w-full h-full bg-black/40 z-30 absolute left-0 top-0"></div>
             <Image
               fill
@@ -35,7 +35,7 @@ const Banner = () => {
               src="/assets/banner3.jpg"
               alt="..."
             ></Image>
-            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40">
+            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40 swiper-box">
               <div className="flex flex-col max-w-[500px] gap-5">
                 <div className="lg:text-5xl text-2xl">
                   Venom: Let There Be Carnage (2021)
@@ -68,7 +68,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>{" "}
         <SwiperSlide>
-          <div className="w-full h-full relative">
+          <div className="w-full h-full relative ">
             <div className="w-full h-full bg-black/40 z-30 absolute left-0 top-0"></div>
             <Image
               fill
@@ -76,7 +76,7 @@ const Banner = () => {
               src="/assets/banner2.jpeg"
               alt="..."
             ></Image>
-            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40">
+            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40 swiper-box">
               <div className="flex flex-col max-w-[500px] gap-5">
                 <div className="lg:text-5xl text-2xl">Oppenheimer (2023)</div>
                 <div className="text-sm lg:text-lg">
@@ -106,7 +106,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>{" "}
         <SwiperSlide>
-          <div className="w-full h-full relative">
+          <div className="w-full h-full relative  ">
             <div className="w-full h-full bg-black/40 z-30 absolute left-0 top-0"></div>
             <Image
               fill
@@ -114,7 +114,7 @@ const Banner = () => {
               src="/assets/banner4.jpg"
               alt="..."
             ></Image>
-            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40">
+            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40 swiper-box">
               <div className="flex flex-col max-w-[500px] gap-5">
                 <div className="lg:text-5xl text-2xl">
                   Heart of Stone (2023)

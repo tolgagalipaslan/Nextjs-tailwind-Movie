@@ -1,6 +1,7 @@
 import { Avatar } from "antd";
 import React from "react";
 import Title from "../ui/Title";
+import Link from "next/link";
 
 const ArtistList = ({ artist }) => {
   return (
@@ -11,12 +12,12 @@ const ArtistList = ({ artist }) => {
           ? artist?.slice(0, 10).map(
               (item, i) =>
                 item?.profile_path && (
-                  <div key={i}>
+                  <Link href={`/artist/${item.id}`} key={i}>
                     <Avatar
                       className="w-full h-full aspect-square border-[4px] border-mainDarkRed cursor-pointer"
                       src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.profile_path}`}
                     />
-                  </div>
+                  </Link>
                 )
             )
           : null}

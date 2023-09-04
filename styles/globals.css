@@ -15,12 +15,15 @@ html {
   font-family: "Roboto", sans-serif;
 }
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-mainBlack2 rounded-lg;
+}
+::-webkit-scrollbar-track {
+  @apply bg-mainGray;
 }
 
 .container {
@@ -104,6 +107,13 @@ html {
   @apply shadow-lg shadow-mainDarkRed translate-y-[-10px] duration-300;
 }
 
+.swiper-slide .swiper-box {
+  @apply lg:!top-1/3 !top-[30%] opacity-0 duration-1000;
+}
+.swiper-slide.swiper-slide-active .swiper-box {
+  @apply lg:!top-1/2 !top-[40%] opacity-100 duration-1000;
+}
+
 .animate-banner-btn {
   animation: shadow-animation 2s infinite;
   -webkit-animation: shadow-animation 2s infinite;
@@ -118,6 +128,25 @@ html {
   100% {
     box-shadow: 0 0 40px 0px #ef233c;
   }
+}
+
+.list-swiper .swiper-button-prev,
+.list-swiper .swiper-button-next {
+  @apply text-mainWhite opacity-0 duration-300;
+}
+.list-swiper:hover .swiper-button-prev {
+  @apply text-mainWhite opacity-100 duration-300;
+}
+.list-swiper:hover .swiper-button-next {
+  @apply text-mainWhite opacity-100 duration-300;
+}
+
+.custom-duration {
+  transition: top 300ms linear;
+  -webkit-transition: top 300ms linear;
+  -moz-transition: top 300ms linear;
+  -ms-transition: top 300ms linear;
+  -o-transition: top 300ms linear;
 }
 /*
 =========================
