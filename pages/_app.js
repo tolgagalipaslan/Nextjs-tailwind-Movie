@@ -21,9 +21,13 @@ export default function App({ Component, pageProps }) {
     }, 1000);
   }, []);
   return (
-    <Layout>
-      <Component {...pageProps} />
-      {!loading ? null : <Loading />}
-    </Layout>
+    <div
+      className={`${loading ? "overflow-hidden h-screen max-h-screen" : ""}`}
+    >
+      <Layout>
+        <Component {...pageProps} />
+        {!loading ? null : <Loading />}
+      </Layout>
+    </div>
   );
 }
