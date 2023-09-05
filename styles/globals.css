@@ -161,6 +161,11 @@ html {
 =========================
 */
 
+.trailer-swiper .swiper-button-prev,
+.trailer-swiper .swiper-button-next {
+  @apply text-mainWhite  duration-300 !opacity-0;
+}
+
 /*
 =========================
   Details End
