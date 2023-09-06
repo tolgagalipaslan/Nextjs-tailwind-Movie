@@ -24,7 +24,7 @@ const Comments = () => {
   return (
     <>
       <div className="container flex gap-5 pb-5">
-        <div className="w-2/3 ">
+        <div className="w-full md:w-2/3 ">
           <div className="flex">
             <div className="bg-mainBlack2 w-fit px-4 py-2 font-semibold text-mainDarkRed rounded-t-md">
               Comments (3)
@@ -40,7 +40,7 @@ const Comments = () => {
                 ></Avatar>
                 <div className="flex flex-col gap-1 text-white w-full">
                   <div className="flex items-center justify-between w-full ">
-                    <div className=" flex text-md items-center gap-2">
+                    <div className=" flex text-sm md:text-md items-center gap-2">
                       John Wick{" "}
                       <Tag className="select-none text-md" color="#c81c22">
                         Admin
@@ -48,7 +48,7 @@ const Comments = () => {
                     </div>
                     <div className="text-white text-xs"> 9 Hours Before</div>
                   </div>
-                  <div className="text-mainGray/90 text-md">
+                  <div className="text-mainGray/90 md:text-md text-xs">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A,
                     similique. Laudantium eligendi sint veniam architecto omnis
                     porro! Obcaecati similique reiciendis dolores dignissimos
@@ -56,18 +56,19 @@ const Comments = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <AiOutlineHeart className="text-lg" />
+                      <AiOutlineHeart className="md:text-lg text-md" />
                       Like
                     </button>
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <BiShare className="text-lg" />
+                      <BiShare className="md:text-lg text-md" />
                       Answer
                     </button>
                     <button
                       onClick={showModal}
                       className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300"
                     >
-                      <AiOutlineExclamationCircle className="text-lg" /> Report
+                      <AiOutlineExclamationCircle className="md:text-lg text-md" />{" "}
+                      Report
                     </button>{" "}
                   </div>
                 </div>
@@ -82,12 +83,12 @@ const Comments = () => {
                 ></Avatar>
                 <div className="flex flex-col gap-1 text-white w-full">
                   <div className="flex items-center justify-between w-full ">
-                    <div className=" flex text-md items-center gap-2">
+                    <div className=" flex text-sm md:text-md items-center gap-2">
                       Rock{" "}
                     </div>
                     <div className="text-white text-xs"> 9 Hours Before</div>
                   </div>
-                  <div className="text-mainGray/90 text-md">
+                  <div className="text-mainGray/90 md:text-md text-xs">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A,
                     similique. Laudantium eligendi sint veniam architecto omnis
                     porro! Obcaecati similique reiciendis dolores dignissimos
@@ -95,18 +96,19 @@ const Comments = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <AiOutlineHeart className="text-lg" />
+                      <AiOutlineHeart className="md:text-lg text-md" />
                       Like
                     </button>
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <BiShare className="text-lg" />
+                      <BiShare className="md:text-lg text-md" />
                       Answer
                     </button>
                     <button
                       onClick={showModal}
                       className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300"
                     >
-                      <AiOutlineExclamationCircle className="text-lg" /> Report
+                      <AiOutlineExclamationCircle className="md:text-lg text-md" />{" "}
+                      Report
                     </button>{" "}
                   </div>
                 </div>
@@ -119,7 +121,7 @@ const Comments = () => {
                 ></Avatar>
                 <div className="flex flex-col gap-1 text-white w-full">
                   <div className="flex items-center justify-between w-full ">
-                    <div className=" flex text-md items-center gap-2">
+                    <div className=" flex text-sm md:text-md items-center gap-2">
                       John Wick{" "}
                       <Tag className="select-none text-md" color="#c81c22">
                         Admin
@@ -127,7 +129,7 @@ const Comments = () => {
                     </div>
                     <div className="text-white text-xs"> 9 Hours Before</div>
                   </div>
-                  <div className="text-mainGray/90 text-md">
+                  <div className="text-mainGray/90 md:text-md text-xs">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A,
                     similique. Laudantium eligendi sint veniam architecto omnis
                     porro! Obcaecati similique reiciendis dolores dignissimos
@@ -135,58 +137,19 @@ const Comments = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <AiOutlineHeart className="text-lg" />
+                      <AiOutlineHeart className="md:text-lg text-md" />
                       Like
                     </button>
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <BiShare className="text-lg" />
+                      <BiShare className="md:text-lg text-md" />
                       Answer
                     </button>
                     <button
                       onClick={showModal}
                       className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300"
                     >
-                      <AiOutlineExclamationCircle className="text-lg" /> Report
-                    </button>{" "}
-                  </div>
-                </div>
-              </div>
-              <div className="flex pl-[120px] gap-5 w-full">
-                <Avatar
-                  src="/assets/default-pp.jpg"
-                  size={50}
-                  className="aspect-square w-[50px] min-w-[50px]"
-                ></Avatar>
-                <div className="flex flex-col gap-1 text-white w-full">
-                  <div className="flex items-center justify-between w-full ">
-                    <div className=" flex text-md items-center gap-2">
-                      John Wick{" "}
-                      <Tag className="select-none text-md" color="#c81c22">
-                        Admin
-                      </Tag>
-                    </div>
-                    <div className="text-white text-xs"> 9 Hours Before</div>
-                  </div>
-                  <div className="text-mainGray/90 text-md">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A,
-                    similique. Laudantium eligendi sint veniam architecto omnis
-                    porro! Obcaecati similique reiciendis dolores dignissimos
-                    earum esse aut, pariatur, inventore error sed non.
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <AiOutlineHeart className="text-lg" />
-                      Like
-                    </button>
-                    <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <BiShare className="text-lg" />
-                      Answer
-                    </button>
-                    <button
-                      onClick={showModal}
-                      className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300"
-                    >
-                      <AiOutlineExclamationCircle className="text-lg" /> Report
+                      <AiOutlineExclamationCircle className="md:text-lg text-md" />{" "}
+                      Report
                     </button>{" "}
                   </div>
                 </div>
@@ -201,7 +164,7 @@ const Comments = () => {
                 ></Avatar>
                 <div className="flex flex-col gap-1 text-white w-full">
                   <div className="flex items-center justify-between w-full ">
-                    <div className=" flex text-md items-center gap-2">
+                    <div className=" flex text-sm md:text-md items-center gap-2">
                       John Wick{" "}
                       <Tag className="select-none text-md" color="#c81c22">
                         Admin
@@ -209,7 +172,7 @@ const Comments = () => {
                     </div>
                     <div className="text-white text-xs"> 9 Hours Before</div>
                   </div>
-                  <div className="text-mainGray/90 text-md">
+                  <div className="text-mainGray/90 md:text-md text-xs">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A,
                     similique. Laudantium eligendi sint veniam architecto omnis
                     porro! Obcaecati similique reiciendis dolores dignissimos
@@ -217,18 +180,19 @@ const Comments = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <AiOutlineHeart className="text-lg" />
+                      <AiOutlineHeart className="md:text-lg text-md" />
                       Like
                     </button>
                     <button className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300">
-                      <BiShare className="text-lg" />
+                      <BiShare className="md:text-lg text-md" />
                       Answer
                     </button>
                     <button
                       onClick={showModal}
                       className="bg-transparent text-white flex items-center gap-1 hover:text-mainDarkRed duration-300"
                     >
-                      <AiOutlineExclamationCircle className="text-lg" /> Report
+                      <AiOutlineExclamationCircle className="md:text-lg text-md" />{" "}
+                      Report
                     </button>{" "}
                   </div>
                 </div>
