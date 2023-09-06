@@ -166,6 +166,25 @@ html {
   @apply text-mainWhite  duration-300 !opacity-0;
 }
 
+.comment-send-input .ant-input-data-count {
+  color: white;
+}
+.comment-send-input .ant-input {
+  @apply bg-mainBlack text-white border-none placeholder:text-mainGray/90;
+}
+.comment-send-input {
+  @apply border-none bg-mainBlack2;
+}
+.comment-report-modal .ant-modal-content {
+  @apply bg-mainBlack2  text-white;
+}
+.comment-report-modal .ant-modal-title {
+  @apply bg-mainBlack2 text-white;
+}
+.comment-report-modal .ant-modal-close {
+  @apply bg-mainBlack2 text-white hover:text-white;
+}
+
 /*
 =========================
   Details End

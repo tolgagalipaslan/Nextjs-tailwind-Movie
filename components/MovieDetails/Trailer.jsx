@@ -129,7 +129,7 @@ const Trailer = ({ video, cast }) => {
                 >
                   <div className="relative w-[100px] min-w-[100px] aspect-video ">
                     <Image
-                      className="object-contain"
+                      className="object-contain "
                       fill
                       src={`https://img.youtube.com/vi/${video[i]?.key}/maxresdefault.jpg`}
                       alt=" "
