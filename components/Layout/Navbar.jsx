@@ -1,15 +1,42 @@
 import useScrollPast65px from "@/hooks/scrollPast65px";
-import { Button } from "antd";
+import { Button, Input } from "antd";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
+import { BsFillPersonFill, BsTv } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdLocalMovies } from "react-icons/md";
 const Navbar = () => {
   const [mobilNavOpen, setMobilNavOpen] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
   const scrolled = useScrollPast65px();
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
+
+  const handleSearch = async (e) => {
+    setSearchQuery(e.target.value.trim());
+    if (e.target.value.trim() === "") {
+      setSearchResult([]);
+    } else {
+      const res = await axios.get(
+        `https://api.themoviedb.org/3/search/multi?include_adult=false&language=en-US&page=1&query=${e.target.value}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
+      );
+
+      setSearchResult(res?.data?.results?.slice(0, 10));
+      console.log(res?.data?.results?.slice(0, 10));
+    }
+  };
+
+  useEffect(() => {
+    setShowSearch(false);
+    setSearchQuery("");
+    setSearchResult("");
+  }, [pathname, query]);
+
   return (
     <>
       <div
@@ -74,6 +101,9 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-3">
             <button
+              onClick={() => {
+                setShowSearch(!showSearch);
+              }}
               type="button"
               className="bg-transparent p-2 text-2xl flex items-center justify-center text-white hover:text-mainDarkRed duration-300"
             >
@@ -99,6 +129,125 @@ const Navbar = () => {
               />
             </Button>
           </div>
+        </div>
+        <div
+          className={`absolute left-0 top-full h-fit min-h-[44px] bg-white w-screen ${
+            showSearch ? " " : "hidden"
+          }`}
+        >
+          <div className="w-full border border-solid border-mainGray/30 border-x-0 border-t-0 ">
+            <div className="container search-wrapper relative  ">
+              <Input
+                onChange={(e) => handleSearch(e)}
+                type="input"
+                value={searchQuery}
+                placeholder="Search for a movie, tv show, person..."
+                className="w-full rounded-none h-full search-input !px-8"
+              />
+              <Button
+                className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black hover:black"
+                type="link"
+              >
+                <AiOutlineSearch />
+              </Button>{" "}
+              <Button
+                onClick={() => setShowSearch(false)}
+                className="absolute right-0 top-1/2 -translate-y-1/2  text-black hover:black"
+                type="link"
+              >
+                <AiOutlineClose />
+              </Button>
+            </div>
+          </div>
+
+          {searchResult?.length !== 0 ? (
+            <div className=" bg-white">
+              <div className="flex flex-col gap-0 w-full">
+                {searchResult.map((item, i) => {
+                  if (item?.media_type === "movie") {
+                    return (
+                      <Link
+                        href={`/movie-details/${item?.id}`}
+                        className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 hover:bg-mainGray/20 duration-300"
+                      >
+                        <div className="container relative px-8">
+                          <Button
+                            className="line-clamp-1 w-full h-fit flex text-black "
+                            key={i}
+                            type="link"
+                          >
+                            {item?.title}
+                          </Button>
+                          <Button
+                            className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black hover:black"
+                            type="link"
+                          >
+                            <MdLocalMovies />
+                          </Button>
+                        </div>
+                      </Link>
+                    );
+                  } else if (item?.media_type === "tv") {
+                    return (
+                      <Link
+                        href={`/tv-details/${item?.id}`}
+                        className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 hover:bg-mainGray/20 duration-300"
+                      >
+                        <div className="container relative px-8 ">
+                          <Button
+                            className="line-clamp-1 w-full flex text-black   "
+                            key={i}
+                            type="link"
+                          >
+                            {item?.name}
+                          </Button>
+                          <Button
+                            className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black hover:black"
+                            type="link"
+                          >
+                            <BsTv />
+                          </Button>
+                        </div>
+                      </Link>
+                    );
+                  } else if (item?.media_type === "person") {
+                    return (
+                      <Link
+                        href={`/person-details/${item?.id}`}
+                        className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 hover:bg-mainGray/20 duration-300"
+                      >
+                        <div className="container relative px-8  ">
+                          <Button
+                            className="line-clamp-1 w-full flex text-black "
+                            key={i}
+                            type="link"
+                          >
+                            {item?.name}
+                          </Button>
+                          <Button
+                            className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black hover:black"
+                            type="link"
+                          >
+                            <BsFillPersonFill />
+                          </Button>
+                        </div>
+                      </Link>
+                    );
+                  } else {
+                    return null; // Return null for unsupported media types
+                  }
+                })}
+              </div>
+            </div>
+          ) : searchQuery !== "" ? (
+            <div className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 ">
+              <div className="container relative px-8 ">
+                <div className="text-mainGray/30">
+                  No results found please look for something else :(
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="h-[65px] w-full "></div>

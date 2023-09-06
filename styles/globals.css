@@ -77,6 +77,19 @@ html {
   Loading Screen End
 =========================
 */
+/*
+=========================
+ Navbar Start
+=========================
+*/
+.search-wrapper .search-input.css-dev-only-do-not-override-nnuwmp {
+  @apply !w-full !h-[44px] !border-none !outline-none focus:!shadow-none;
+}
+/*
+=========================
+  Navbar End
+=========================
+*/
 
 /*
 =========================
