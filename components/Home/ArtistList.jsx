@@ -12,7 +12,12 @@ const ArtistList = ({ artist }) => {
           ? artist?.slice(0, 10).map(
               (item, i) =>
                 item?.profile_path && (
-                  <Link href={`/artist/${item.id}`} key={i}>
+                  <Link
+                    href={`/person/${item?.name
+                      ?.toLowerCase()
+                      .replace(/ /g, "-")}`}
+                    key={i}
+                  >
                     <Avatar
                       className="w-full h-full aspect-square border-[4px] border-mainDarkRed cursor-pointer"
                       src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.profile_path}`}

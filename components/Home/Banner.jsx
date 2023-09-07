@@ -8,8 +8,11 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { Button } from "antd";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <div className="mt-[-65px]">
       <Swiper
@@ -50,18 +53,28 @@ const Banner = () => {
                     type="button"
                     shape="round"
                     size="large"
+                    onClick={() =>
+                      router.push(
+                        "/movie-details/580489-venom-let-there-be-carnage"
+                      )
+                    }
                     className="bg-mainDarkRed text-white animate-banner-btn"
                   >
                     See more
                   </Button>
-                  <Button
-                    type="button"
-                    shape="round"
-                    size="large"
-                    className="bg-transparent text-white  border-white"
+                  <Link
+                    href={"https://www.youtube.com/watch?v=-FmWuCgJmxo"}
+                    target="_blank"
                   >
-                    Watch Trailer
-                  </Button>
+                    <Button
+                      type="button"
+                      shape="round"
+                      size="large"
+                      className="bg-transparent text-white  border-white"
+                    >
+                      Watch Trailer
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -88,18 +101,26 @@ const Banner = () => {
                     type="button"
                     shape="round"
                     size="large"
+                    onClick={() =>
+                      router.push("/movie-details/872585-oppenheimer")
+                    }
                     className="bg-mainDarkRed text-white animate-banner-btn"
                   >
                     See more
                   </Button>
-                  <Button
-                    type="button"
-                    shape="round"
-                    size="large"
-                    className="bg-transparent text-white  border-white"
+                  <Link
+                    href={"https://www.youtube.com/watch?v=uYPbbksJxIg"}
+                    target="_blank"
                   >
-                    Watch Trailer
-                  </Button>
+                    <Button
+                      type="button"
+                      shape="round"
+                      size="large"
+                      className="bg-transparent text-white  border-white"
+                    >
+                      Watch Trailer
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -130,17 +151,25 @@ const Banner = () => {
                     shape="round"
                     size="large"
                     className="bg-mainDarkRed text-white animate-banner-btn"
+                    onClick={() =>
+                      router.push("/movie-details/724209-heart-of-stone")
+                    }
                   >
                     See more
                   </Button>
-                  <Button
-                    type="button"
-                    shape="round"
-                    size="large"
-                    className="bg-transparent text-white  border-white"
+                  <Link
+                    href={"https://www.youtube.com/watch?v=XuDwndGaCFo"}
+                    target="_blank"
                   >
-                    Watch Trailer
-                  </Button>
+                    <Button
+                      type="button"
+                      shape="round"
+                      size="large"
+                      className="bg-transparent text-white  border-white"
+                    >
+                      Watch Trailer
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

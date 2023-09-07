@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { BsFillPersonFill, BsTv } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -16,7 +16,9 @@ const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const scrolled = useScrollPast65px();
   const { pathname, query } = useRouter();
+  const router = useRouter();
 
+  const searchInputRef = useRef(null);
   const handleSearch = async (e) => {
     setSearchQuery(e.target.value.trim());
     if (e.target.value.trim() === "") {
@@ -37,12 +39,45 @@ const Navbar = () => {
     setSearchResult("");
   }, [pathname, query]);
 
+  const handleSearchBtn = () => {
+    setShowSearch(!showSearch);
+    setSearchQuery("");
+    setSearchResult("");
+    setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 0);
+  };
+
+  const handlePressEnter = () => {
+    if (searchResult?.length !== 0) {
+      if (searchResult[0]?.media_type === "movie") {
+        router.push(
+          `/movie-details/${searchResult[0]?.id}-${searchResult[0]?.title
+            ?.toLowerCase()
+            .replace(/ /g, "-")}`
+        );
+      } else if (searchResult[0]?.media_type === "tv") {
+        router.push(
+          `/tv-details/${searchResult[0]?.id}-${searchResult[0]?.name
+            ?.toLowerCase()
+            .replace(/ /g, "-")}`
+        );
+      } else if (searchResult[0]?.media_type === "person") {
+        router.push(
+          `/person/${searchResult[0]?.name?.toLowerCase().replace(/ /g, "-")}`
+        );
+      }
+    } else {
+      return;
+    }
+  };
+
   return (
-    <>
+    <div className={`${pathname === "/404" ? "hidden" : ""}`}>
       <div
         className={`fixed top-0 left-0 w-full z-40 h-[65px] bg-mainBlack2 ${
           scrolled ? "lg:bg-mainBlack2/70 backdrop-blur-lg" : "lg:bg-black/0"
-        }`}
+        } `}
       >
         <div className="container flex items-center justify-between w-full h-full text-white">
           <div className="flex items-center gap-5">
@@ -102,9 +137,9 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
-                setShowSearch(!showSearch);
+                handleSearchBtn();
               }}
-              type="button"
+              type="link"
               className="bg-transparent p-2 text-2xl flex items-center justify-center text-white hover:text-mainDarkRed duration-300"
             >
               <AiOutlineSearch />
@@ -141,6 +176,8 @@ const Navbar = () => {
                 onChange={(e) => handleSearch(e)}
                 type="input"
                 value={searchQuery}
+                ref={searchInputRef}
+                onPressEnter={() => handlePressEnter()}
                 placeholder="Search for a movie, tv show, person..."
                 className="w-full rounded-none h-full search-input !px-8"
               />
@@ -167,7 +204,9 @@ const Navbar = () => {
                   if (item?.media_type === "movie") {
                     return (
                       <Link
-                        href={`/movie-details/${item?.id}`}
+                        href={`/movie-details/${item?.id}-${item?.title
+                          ?.toLowerCase()
+                          .replace(/ /g, "-")}`}
                         className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 hover:bg-mainGray/20 duration-300"
                       >
                         <div className="container relative px-8">
@@ -190,7 +229,9 @@ const Navbar = () => {
                   } else if (item?.media_type === "tv") {
                     return (
                       <Link
-                        href={`/tv-details/${item?.id}`}
+                        href={`/tv-details/${item?.id}-${item?.name
+                          ?.toLowerCase()
+                          .replace(/ /g, "-")}`}
                         className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 hover:bg-mainGray/20 duration-300"
                       >
                         <div className="container relative px-8 ">
@@ -213,7 +254,9 @@ const Navbar = () => {
                   } else if (item?.media_type === "person") {
                     return (
                       <Link
-                        href={`/person-details/${item?.id}`}
+                        href={`/person/${item?.name
+                          ?.toLowerCase()
+                          .replace(/ /g, "-")}`}
                         className="relative w-full px-8 border border-solid border-mainGray/30 border-x-0 border-t-0 hover:bg-mainGray/20 duration-300"
                       >
                         <div className="container relative px-8  ">
@@ -251,7 +294,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="h-[65px] w-full "></div>
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import {
   AiFillHome,
@@ -15,8 +16,13 @@ import { BsInstagram } from "react-icons/bs";
 
 import { FaFacebookF } from "react-icons/fa";
 function Footer() {
+  const { pathname } = useRouter();
   return (
-    <div className="bg-gray-800 text-white ">
+    <div
+      className={`bg-gray-800 text-white ${
+        pathname === "/404" ? "hidden" : ""
+      } `}
+    >
       <div className="bg-mainBlack2">
         <section className="flex container justify-between p-4 ">
           <div className="mr-5">

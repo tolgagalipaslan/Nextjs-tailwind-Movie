@@ -45,122 +45,128 @@ const Trailer = ({ video, cast }) => {
   }, []);
   return (
     <div id="trailer-wrapper">
-      <div className="container">
-        <Title>Trailers & Featurette</Title>
-      </div>
-      <div
-        className="container py-10 flex md:flex-row flex-col h-full "
-        id="videoContainer"
-      >
-        {video[0]?.key && (
-          <iframe
-            className="w-full md:w-2/3 aspect-video"
-            src={`https://www.youtube.com/embed/${video[selectedVideo].key}`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
-        <div className="w-full md:w-1/3 aspect-video py-3 bg-mainBlack2">
-          <div className="md:h-[10%] flex items-center justify-center ">
-            {" "}
-            <div
-              className={`text-white text-3xl   duration-300 ${
-                disabledBtn === "prev"
-                  ? "!text-mainGray/30"
-                  : "cursor-pointer hover:text-mainDarkRed"
-              } `}
-              onClick={() => nextBtn.click()}
-              type="button"
-            >
-              <AiOutlineUp />
-            </div>
+      {video?.length !== 0 ? (
+        <>
+          <div className="container">
+            <Title>Trailers & Featurette</Title>
           </div>
-          <Swiper
-            onSlideChange={() => {
-              if (swiperRef.current.swiper.isBeginning) {
-                setDisabledBtn("prev");
-              } else if (swiperRef.current.swiper.isEnd) {
-                setDisabledBtn("next");
-              } else {
-                setDisabledBtn("");
-              }
-            }}
-            slidesPerView={1}
-            spaceBetween={10}
-            ref={swiperRef}
-            breakpoints={{
-              0: {
-                slidesPerView: 5,
-                spaceBetween: 0,
-              },
-              550: {
-                slidesPerView: 5,
-                spaceBetween: 0,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 0,
-              },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 0,
-              },
-            }}
-            navigation={true}
-            modules={[Navigation]}
-            direction={"vertical"}
-            className="trailer-swiper  w-full h-[400px] md:h-[80%] "
+          <div
+            className="container py-10 flex md:flex-row flex-col h-full "
+            id="videoContainer"
           >
-            {video?.map((item, i) => (
-              <SwiperSlide
-                onClick={() => {
-                  setSelectedVideo(i);
-                  handleGoToSlide(i);
-                }}
-                key={i}
-                className="relative "
-              >
+            {video[0]?.key && (
+              <iframe
+                className="w-full md:w-2/3 aspect-video"
+                src={`https://www.youtube.com/embed/${video[selectedVideo].key}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            )}
+            <div className="w-full md:w-1/3 aspect-video py-3 bg-mainBlack2">
+              <div className="md:h-[10%] flex items-center justify-center ">
+                {" "}
                 <div
-                  key={i}
-                  className={`flex  gap-3 h-full hover:bg-mainGray/30 cursor-pointer p-3 ${
-                    selectedVideo === i ? "bg-mainGray/30" : ""
-                  }`}
+                  className={`text-white text-3xl   duration-300 ${
+                    disabledBtn === "prev"
+                      ? "!text-mainGray/30"
+                      : "cursor-pointer hover:text-mainDarkRed"
+                  } `}
+                  onClick={() => nextBtn.click()}
+                  type="button"
                 >
-                  <div className="relative w-[100px] min-w-[100px] aspect-video ">
-                    <Image
-                      className="object-contain "
-                      fill
-                      src={`https://img.youtube.com/vi/${video[i]?.key}/maxresdefault.jpg`}
-                      alt=" "
-                    />
-                  </div>
-                  <div className="flex flex-col w-full text-white">
-                    <div className="font-semibold line-clamp-1">
-                      {item?.name}
-                    </div>
-                    <div className="text-sm text-mainGray/50">{item?.type}</div>
-                  </div>
+                  <AiOutlineUp />
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <div className="md:h-[10%] flex items-center justify-center">
-            {" "}
-            <div
-              className={`text-white text-3xl   duration-300 ${
-                disabledBtn === "next"
-                  ? "!text-mainGray/30"
-                  : "cursor-pointer hover:text-mainDarkRed"
-              } `}
-              onClick={() => prevBtn.click()}
-              type="button"
-            >
-              <AiOutlineDown />
+              </div>
+              <Swiper
+                onSlideChange={() => {
+                  if (swiperRef.current.swiper.isBeginning) {
+                    setDisabledBtn("prev");
+                  } else if (swiperRef.current.swiper.isEnd) {
+                    setDisabledBtn("next");
+                  } else {
+                    setDisabledBtn("");
+                  }
+                }}
+                slidesPerView={1}
+                spaceBetween={10}
+                ref={swiperRef}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 5,
+                    spaceBetween: 0,
+                  },
+                  550: {
+                    slidesPerView: 5,
+                    spaceBetween: 0,
+                  },
+                  768: {
+                    slidesPerView: 4,
+                    spaceBetween: 0,
+                  },
+                  1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 0,
+                  },
+                }}
+                navigation={true}
+                modules={[Navigation]}
+                direction={"vertical"}
+                className="trailer-swiper  w-full h-[400px] md:h-[80%] "
+              >
+                {video?.map((item, i) => (
+                  <SwiperSlide
+                    onClick={() => {
+                      setSelectedVideo(i);
+                      handleGoToSlide(i);
+                    }}
+                    key={i}
+                    className="relative "
+                  >
+                    <div
+                      key={i}
+                      className={`flex  gap-3 h-full hover:bg-mainGray/30 cursor-pointer p-3 ${
+                        selectedVideo === i ? "bg-mainGray/30" : ""
+                      }`}
+                    >
+                      <div className="relative w-[100px] min-w-[100px] aspect-video ">
+                        <Image
+                          className="object-contain "
+                          fill
+                          src={`https://img.youtube.com/vi/${video[i]?.key}/maxresdefault.jpg`}
+                          alt=" "
+                        />
+                      </div>
+                      <div className="flex flex-col w-full text-white">
+                        <div className="font-semibold line-clamp-1">
+                          {item?.name}
+                        </div>
+                        <div className="text-sm text-mainGray/50">
+                          {item?.type}
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <div className="md:h-[10%] flex items-center justify-center">
+                {" "}
+                <div
+                  className={`text-white text-3xl   duration-300 ${
+                    disabledBtn === "next"
+                      ? "!text-mainGray/30"
+                      : "cursor-pointer hover:text-mainDarkRed"
+                  } `}
+                  onClick={() => prevBtn.click()}
+                  type="button"
+                >
+                  <AiOutlineDown />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      ) : null}
     </div>
   );
 };

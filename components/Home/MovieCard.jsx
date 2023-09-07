@@ -39,9 +39,9 @@ const Card = ({ movie, castAndCrew }) => {
       return "#f50";
     }
   }
-
+  const formattedTitle = movie?.title?.toLowerCase().replace(/ /g, "-");
   return (
-    <Link className="p-0" href={`/movie-details/${movie.id}`}>
+    <Link className="p-0" href={`/movie-details/${movie.id}-${formattedTitle}`}>
       <div className="relative overflow-hidden w-full !rounded-2xl  group p-0">
         <div className="absolute group-hover:top-0 top-full left-0 bg-gradient-to-b from-transparent to-black group-hover:backdrop-blur-sm custom-duration z-30 w-full h-full flex flex-col gap-1 p-3   ">
           <div className="flex flex-col gap-1  mt-auto ">

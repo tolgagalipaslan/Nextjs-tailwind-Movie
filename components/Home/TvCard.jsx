@@ -48,9 +48,9 @@ const TvCard = ({ tv, castAndCrewTvRes }) => {
       return false;
     }
   };
-
+  const formattedName = tv?.name?.toLowerCase().replace(/ /g, "-");
   return (
-    <Link href={`/tv-details/${tv.id}`}>
+    <Link href={`/tv-details/${tv.id}-${formattedName}`}>
       <div className="relative overflow-hidden w-full rounded-2xl group ">
         <div className="absolute group-hover:top-0 top-full left-0 bg-gradient-to-b from-transparent to-black group-hover:backdrop-blur-sm custom-duration z-30 w-full h-full flex flex-col gap-1 p-3   ">
           <div className="flex flex-col gap-1  mt-auto ">

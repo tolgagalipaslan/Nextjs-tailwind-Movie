@@ -34,7 +34,11 @@ const Banner = ({ movie, cast, video }) => {
             <Image
               className=" "
               fill
-              src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.poster_path}`}
+              src={`${
+                movie?.poster_path === null
+                  ? "/assets/default-img.png"
+                  : `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.poster_path}`
+              }`}
               alt=""
             />
           </div>
@@ -115,29 +119,34 @@ const Banner = ({ movie, cast, video }) => {
                   <AiFillStar />
                 </Button>
               </Tooltip>
-              <Tooltip
-                color="#2b2d42"
-                placement="bottom"
-                title={"Play Trailer"}
-                arrow={mergedArrow}
-              >
-                <Link
-                  href={"#trailer-wrapper"}
-                  className="text-white  flex items-center cursor-pointer text-xl font-semibold"
+              {video?.length !== 0 ? (
+                <Tooltip
+                  color="#2b2d42"
+                  placement="bottom"
+                  title={"Play Trailer"}
+                  arrow={mergedArrow}
                 >
-                  <Button
-                    type="button"
-                    className="text-white bg-mainBlack h-full aspect-square flex items-center justify-center"
-                    shape="round"
+                  <Link
+                    href={"#trailer-wrapper"}
+                    className="text-white  flex items-center cursor-pointer text-xl font-semibold"
                   >
-                    <BsFillPlayFill />
-                  </Button>
-                </Link>
-              </Tooltip>
+                    <Button
+                      type="button"
+                      className="text-white bg-mainBlack h-full aspect-square flex items-center justify-center"
+                      shape="round"
+                    >
+                      <BsFillPlayFill />
+                    </Button>
+                  </Link>
+                </Tooltip>
+              ) : null}
             </div>
             <i className="text-gray-300/90 text-xl italic">{movie?.tagline}</i>
             <div className="text-xl font-semibold">Overwiew</div>
-            <div className=" font-semibold line-clamp-3">{movie?.overview}</div>
+            <div className=" font-semibold line-clamp-3">
+              {movie?.overview ||
+                "No overview has been specified for this content."}
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-5 mt-5">
               {cast?.crew?.slice(0, 6).map((item, i) => (
                 <div key={i} className="flex flex-col gap-0 ">
