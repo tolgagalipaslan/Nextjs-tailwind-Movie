@@ -221,6 +221,13 @@ html {
 .filters .ant-collapse-expand-icon {
   @apply text-white;
 }
+.rate-range .ant-slider-mark-text {
+  @apply !text-gray-600;
+}
+
+.rate-range .ant-slider-mark-text-active {
+  @apply !text-white;
+}
 
 /*
 =========================
