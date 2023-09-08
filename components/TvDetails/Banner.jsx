@@ -30,7 +30,7 @@ const Banner = ({ tv, cast, video }) => {
         <div className="absolute left-0 top-0 w-full h-full py-5 lg:h-screen  lg:max-h-[550px]   bg-black/50 z-20"></div>
 
         <div className="w-full h-full z-30 relative container  py-3 lg:py-10 flex items-center gap-10">
-          <div className="relative hidden lg:flex aspect-[4/6] min-w-[300px] h-full rounded-2xl overflow-hidden">
+          <div className="relative hidden lg:flex bg-red-300 aspect-[9/16] min-w-[300px] h-full rounded-2xl overflow-hidden">
             <Image
               className=" "
               fill

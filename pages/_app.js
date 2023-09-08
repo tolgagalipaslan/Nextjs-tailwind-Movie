@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }) {
     >
       <Layout>
         <Component {...pageProps} />
-        {!loading ? null : <Loading />}
+        <Loading loading={loading} />
       </Layout>
     </div>
   );

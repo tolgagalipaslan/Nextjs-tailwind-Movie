@@ -4,12 +4,13 @@ import Title from "../ui/Title";
 import Link from "next/link";
 
 const ArtistList = ({ artist }) => {
+  const newlist = artist?.filter((i) => i?.profile_path !== null);
   return (
     <div className="container py-10">
       <Title>Popular Artist</Title>
       <div className=" grid  grid-cols-5 md:grid-cols-10 items-center gap-5 overflow-hidden  ">
         {artist?.length !== 0
-          ? artist?.slice(0, 10).map(
+          ? newlist?.slice(0, 10).map(
               (item, i) =>
                 item?.profile_path && (
                   <Link

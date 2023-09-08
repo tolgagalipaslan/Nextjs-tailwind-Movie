@@ -203,3 +203,27 @@ html {
   Details End
 =========================
 */
+
+/*
+=========================
+  Movies Start
+=========================
+*/
+.filters .ant-collapse-content {
+  @apply !bg-mainBlack2 text-white !border-b-0;
+}
+.filters .ant-collapse-item {
+  @apply !border-b-0;
+}
+.filters .ant-collapse-header-text {
+  @apply text-white;
+}
+.filters .ant-collapse-expand-icon {
+  @apply text-white;
+}
+
+/*
+=========================
+  Movies End
+=========================
+*/

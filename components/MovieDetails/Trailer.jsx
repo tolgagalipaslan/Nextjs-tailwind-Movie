@@ -69,7 +69,7 @@ const Trailer = ({ video, cast }) => {
                 <div
                   className={`text-white text-3xl   duration-300 ${
                     disabledBtn === "prev"
-                      ? "!text-mainGray/30"
+                      ? "!text-mainBlack"
                       : "cursor-pointer hover:text-mainDarkRed"
                   } `}
                   onClick={() => nextBtn.click()}
@@ -154,7 +154,7 @@ const Trailer = ({ video, cast }) => {
                 <div
                   className={`text-white text-3xl   duration-300 ${
                     disabledBtn === "next"
-                      ? "!text-mainGray/30"
+                      ? "!text-mainBlack"
                       : "cursor-pointer hover:text-mainDarkRed"
                   } `}
                   onClick={() => prevBtn.click()}

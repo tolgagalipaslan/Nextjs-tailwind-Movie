@@ -19,8 +19,39 @@ const Navbar = () => {
   const router = useRouter();
 
   const searchInputRef = useRef(null);
+  const searchWrapperRef = useRef(null);
+  const searchBtnRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchWrapperRef.current &&
+        !searchWrapperRef.current.contains(event.target) &&
+        searchBtnRef.current &&
+        !searchBtnRef.current.contains(event.target)
+      ) {
+        closeSearch();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [searchWrapperRef, searchBtnRef]);
+
+  const closeSearch = () => {
+    setShowSearch(false);
+    setSearchQuery("");
+    setSearchResult("");
+  };
+
   const handleSearch = async (e) => {
-    setSearchQuery(e.target.value.trim());
+    if (e.target.value.trim() === "") {
+      setSearchQuery(e.target.value.trim());
+    }
+    setSearchQuery(e.target.value);
+
     if (e.target.value.trim() === "") {
       setSearchResult([]);
     } else {
@@ -72,8 +103,13 @@ const Navbar = () => {
     }
   };
 
+  const hideNavbar =
+    pathname === "/404" ||
+    pathname === "/auth/login" ||
+    pathname === "/auth/register";
+
   return (
-    <div className={`${pathname === "/404" ? "hidden" : ""}`}>
+    <div className={`${hideNavbar ? "hidden" : ""}`}>
       <div
         className={`fixed top-0 left-0 w-full z-40 h-[65px] bg-mainBlack2 ${
           scrolled ? "lg:bg-mainBlack2/70 backdrop-blur-lg" : "lg:bg-black/0"
@@ -139,12 +175,17 @@ const Navbar = () => {
               onClick={() => {
                 handleSearchBtn();
               }}
+              ref={searchBtnRef}
               type="link"
               className="bg-transparent p-2 text-2xl flex items-center justify-center text-white hover:text-mainDarkRed duration-300"
             >
               <AiOutlineSearch />
             </button>
-            <Button type="button" className="bg-mainDarkRed text-white">
+            <Button
+              onClick={() => router.push("/auth/login")}
+              type="button"
+              className="bg-mainDarkRed text-white"
+            >
               Login
             </Button>
             <Button
@@ -169,6 +210,7 @@ const Navbar = () => {
           className={`absolute left-0 top-full h-fit min-h-[44px] bg-white w-screen ${
             showSearch ? " " : "hidden"
           }`}
+          ref={searchWrapperRef}
         >
           <div className="w-full border border-solid border-mainGray/30 border-x-0 border-t-0 ">
             <div className="container search-wrapper relative  ">

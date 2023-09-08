@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper/modules";
 import Title from "../ui/Title";
+import Link from "next/link";
 
 const CastList = ({ cast }) => {
   return (
@@ -46,12 +47,18 @@ const CastList = ({ cast }) => {
               (cast, i) =>
                 cast?.profile_path && (
                   <SwiperSlide key={i}>
-                    <div
-                      style={{
-                        backgroundImage: `url(https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${cast?.profile_path})`,
-                      }}
-                      className="w-full aspect-[9/12] bg-cover bg-center rounded-2xl"
-                    ></div>
+                    <Link
+                      href={`/person/${cast?.name
+                        ?.toLowerCase()
+                        .replace(/ /g, "-")}`}
+                    >
+                      <div
+                        style={{
+                          backgroundImage: `url(https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${cast?.profile_path})`,
+                        }}
+                        className="w-full aspect-[9/12] bg-cover bg-center rounded-2xl"
+                      ></div>
+                    </Link>
                   </SwiperSlide>
                 )
             )}

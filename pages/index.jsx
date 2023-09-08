@@ -3,11 +3,16 @@ import Banner from "@/components/Home/Banner";
 import PopularMovies from "@/components/Home/PopularMovies";
 import PopularTv from "@/components/Home/PopularTv";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 
 const Home = ({ artist, movies, castAndCrew, castAndCrewTvRes, tv }) => {
   return (
     <div className=" ">
+      <Head>
+        <link rel="icon" href="/assets/logo1.png" />
+        <title>Ofenos Movies</title>
+      </Head>
       <div className="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 z-[-1] w-[80vh] aspect-square rounded-full blur-[150px] bg-mainWhite/50"></div>
       <Banner />
 

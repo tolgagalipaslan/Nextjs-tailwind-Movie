@@ -218,7 +218,7 @@ const Comments = () => {
               />
               <Button
                 type="link"
-                className="bg-transparent text-white absolute bottom-1 right-0 z-20 text-lg"
+                className="bg-transparent text-white absolute bottom-1 -right-1 z-20 text-lg"
               >
                 <FiSend />
               </Button>

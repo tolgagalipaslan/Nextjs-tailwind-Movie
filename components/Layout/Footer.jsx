@@ -17,12 +17,12 @@ import { BsInstagram } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 function Footer() {
   const { pathname } = useRouter();
+  const hideFooter =
+    pathname === "/404" ||
+    pathname === "/auth/login" ||
+    pathname === "/auth/register";
   return (
-    <div
-      className={`bg-gray-800 text-white ${
-        pathname === "/404" ? "hidden" : ""
-      } `}
-    >
+    <div className={`bg-gray-800 text-white ${hideFooter ? "hidden" : ""} `}>
       <div className="bg-mainBlack2">
         <section className="flex container justify-between p-4 ">
           <div className="mr-5">
@@ -118,8 +118,8 @@ function Footer() {
               </a>
             </p>
             <p>
-              <a href="#!" className="text-white">
-                Shipping Rates
+              <a href="/faq" className="text-white">
+                F.A.Q
               </a>
             </p>
             <p>
