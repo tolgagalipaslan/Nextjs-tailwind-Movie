@@ -8,7 +8,7 @@ const ArtistList = ({ artist }) => {
   return (
     <div className="container py-10">
       <Title>Popular Artist</Title>
-      <div className=" grid  grid-cols-5 md:grid-cols-10 items-center gap-5 overflow-hidden  ">
+      <div className=" grid  grid-cols-5 md:grid-cols-10 items-center gap-2 md:gap-5 overflow-hidden  ">
         {artist?.length !== 0
           ? newlist?.slice(0, 10).map(
               (item, i) =>
@@ -20,7 +20,7 @@ const ArtistList = ({ artist }) => {
                     key={i}
                   >
                     <Avatar
-                      className="w-full h-full aspect-square border-[4px] border-mainDarkRed cursor-pointer"
+                      className="w-full h-full aspect-square border-[2px] md:border-[4px] border-mainDarkRed cursor-pointer"
                       src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.profile_path}`}
                     />
                   </Link>

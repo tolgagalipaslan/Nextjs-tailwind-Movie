@@ -21,7 +21,7 @@ const CastList = ({ cast }) => {
             slidesPerView={1}
             spaceBetween={10}
             breakpoints={{
-              400: {
+              0: {
                 slidesPerView: 2,
                 spaceBetween: 10,
               },

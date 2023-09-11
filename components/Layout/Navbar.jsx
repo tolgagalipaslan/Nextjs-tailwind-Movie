@@ -68,6 +68,7 @@ const Navbar = () => {
     setShowSearch(false);
     setSearchQuery("");
     setSearchResult("");
+    setMobilNavOpen(false);
   }, [pathname, query]);
 
   const handleSearchBtn = () => {
