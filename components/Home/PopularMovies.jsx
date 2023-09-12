@@ -33,7 +33,7 @@ const PopularMovies = ({ movies, castAndCrew }) => {
               spaceBetween: 10,
             },
             1024: {
-              slidesPerView: 5,
+              slidesPerView: 6,
               spaceBetween: 10,
             },
           }}

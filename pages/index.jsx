@@ -25,8 +25,6 @@ const Home = ({ artist, movies, castAndCrew, castAndCrewTvRes, tv }) => {
   );
 };
 
-export default Home;
-
 export const getStaticProps = async () => {
   try {
     const artistRes = await axios.get(
@@ -90,6 +88,7 @@ export const getStaticProps = async () => {
       },
     };
   } catch (error) {
+    console.log(error);
     return {
       props: {
         artist: [],
@@ -102,3 +101,5 @@ export const getStaticProps = async () => {
     };
   }
 };
+
+export default Home;

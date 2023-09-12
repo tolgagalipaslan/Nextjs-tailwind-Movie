@@ -11,7 +11,7 @@ const Card = ({ movie }) => {
         .replace(/ /g, "-")}`}
       className="w-full flex items-center sm:items-start flex-row sm:flex-col  rounded sm:rounded-xl overflow-hidden h-full bg-cover bg-mainBlack2"
     >
-      <div className="relative h-[150px] sm:w-full aspect-[9/12] sm:aspect-[9/13] ">
+      <div className="relative h-[160px] sm:h-auto  sm:w-full aspect-[9/12] sm:aspect-[9/11] ">
         <Image
           src={`${
             movie?.backdrop_path
