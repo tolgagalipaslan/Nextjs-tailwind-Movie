@@ -125,17 +125,17 @@ html {
 }
 .home-banner .swiper-pagination-bullet:nth-child(1)::after {
   content: "";
-  background-image: url("../public/assets/venom.jpg");
+  background-image: url("/assets/venom.jpg");
   @apply lg:w-[130px] lg:h-[220px] w-[100px] h-[180px] z-40 block bg-cover rounded-xl bg-center;
 }
 .home-banner .swiper-pagination-bullet:nth-child(2)::after {
   content: "";
-  background-image: url("../public/assets/heimer.jpg");
+  background-image: url("/assets/heimer.jpg");
   @apply lg:w-[130px] lg:h-[220px] w-[100px] h-[180px] z-40 block bg-cover rounded-xl bg-center;
 }
 .home-banner .swiper-pagination-bullet:nth-child(3)::after {
   content: "";
-  background-image: url("../public/assets/banner4-icon.jpg");
+  background-image: url("/assets/banner4-icon.jpg");
   @apply lg:w-[130px] lg:h-[220px] w-[100px] h-[180px] z-40 block bg-cover rounded-xl bg-center;
 }
 .home-banner .swiper-pagination-bullet.swiper-pagination-bullet-active::after {
