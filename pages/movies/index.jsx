@@ -125,7 +125,7 @@ const Movies = ({ data }) => {
               <div>No items were found that match your query.</div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  gap-5">
               {movies?.map((movie, i) => (
                 <Card movie={movie} key={i} />
               ))}

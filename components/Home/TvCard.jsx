@@ -1,4 +1,4 @@
-import { Avatar, Tag } from "antd";
+import { Avatar, Button, Tag } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -47,51 +47,26 @@ const TvCard = ({ tv }) => {
   };
   const formattedName = tv?.name?.toLowerCase().replace(/ /g, "-");
   return (
-    <Link href={`/tv-details/${tv.id}-${formattedName}`}>
-      <div className="relative overflow-hidden w-full rounded-2xl group ">
-        <div className="absolute group-hover:top-0 top-full left-0 bg-gradient-to-b from-transparent to-black group-hover:backdrop-blur-sm custom-duration z-30 w-full h-full flex flex-col gap-1 p-3   ">
-          <div className="flex flex-col gap-1  mt-auto ">
-            <div className="line-clamp-1 text-white text-xl font-semibold">
-              {tv.name}
-            </div>
-
-            <div className="-mt-1 flex items-center gap-2">
-              <ReactStars
-                value={tv.vote_average / 2}
-                isHalf={true}
-                count={5}
-                edit={false}
-                size={24}
-                activeColor="#ffd700"
-              />
-              <div className="text-[#ffd700]">
-                {tv.vote_average?.toString().slice(0, 3)}
-              </div>
-            </div>
-            <div className="flex items-center gap-y-5 ">
-              {tv.genre_ids?.slice(0, 2).map((item, i) =>
-                getGenre(item) !== false ? (
-                  <Tag key={i} color={getColorByGenre(item)}>
-                    {getGenre(item)?.name}
-                  </Tag>
-                ) : null
-              )}
-            </div>
-            <div className="text-white line-clamp-3 text-sm">{tv.overview}</div>
-          </div>
-        </div>
-        <div className="w-full aspect-[9/14]  relative">
-          <Image
-            alt=""
-            className="object-cover object-center w-full h-full"
-            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
-            width={500}
-            height={500}
-            placeholder="blur"
-            blurDataURL={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
-            loading="lazy"
-          ></Image>
-        </div>
+    <Link
+      className="p-0 flex flex-col gap-2 group overflow-hidden "
+      href={`/movie-details/${tv.id}-${formattedName}`}
+    >
+      <div className="w-full aspect-[9/14]  relative">
+        <Image
+          alt=""
+          className="object-cover object-center w-full h-full rounded-2xl"
+          src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
+          width={500}
+          height={500}
+          placeholder="blur"
+          blurDataURL={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
+          loading="lazy"
+        ></Image>
+      </div>
+      <div className="w-full h-full absolute left-0 top-0 hidden group-hover:flex rounded-2xl bg-black/20 items-center justify-center">
+        <Button type="button" className="bg-mainDarkRed text-white">
+          See more
+        </Button>
       </div>
     </Link>
   );

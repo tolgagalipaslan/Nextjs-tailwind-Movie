@@ -98,10 +98,8 @@ const SideBar = ({
       }
       window.scroll(0, 0);
 
-      if (smallScreen) {
-        setActiveKey1(["99"]);
-        setActiveKey2(["99"]);
-      }
+      setActiveKey1(["99"]);
+      setActiveKey2(["99"]);
     } catch (error) {
       console.log(error);
       message.error("Something went wrong");

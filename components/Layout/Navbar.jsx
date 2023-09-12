@@ -60,7 +60,6 @@ const Navbar = () => {
       );
 
       setSearchResult(res?.data?.results?.slice(0, 10));
-      console.log(res?.data?.results?.slice(0, 10));
     }
   };
 

@@ -25,16 +25,20 @@ const CastList = ({ cast }) => {
                 slidesPerView: 2,
                 spaceBetween: 10,
               },
+              400: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
               550: {
                 slidesPerView: 3,
                 spaceBetween: 10,
               },
               768: {
-                slidesPerView: 4,
+                slidesPerView: 5,
                 spaceBetween: 10,
               },
               1024: {
-                slidesPerView: 6,
+                slidesPerView: 7,
                 spaceBetween: 10,
               },
             }}

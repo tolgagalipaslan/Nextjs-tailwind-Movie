@@ -1,8 +1,8 @@
-import { Avatar, Tag } from "antd";
+import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import ReactStars from "react-rating-stars-component";
+
 const Card = ({ movie }) => {
   const filmGenres = [
     { id: 28, name: "Action", color: "#f50" },
@@ -38,54 +38,26 @@ const Card = ({ movie }) => {
   }
   const formattedTitle = movie?.title?.toLowerCase().replace(/ /g, "-");
   return (
-    <Link className="p-0" href={`/movie-details/${movie.id}-${formattedTitle}`}>
-      <div className="relative overflow-hidden w-full !rounded-2xl  group p-0">
-        <div className="absolute group-hover:top-0 top-full left-0 bg-gradient-to-b from-transparent to-black group-hover:backdrop-blur-sm custom-duration z-30 w-full h-full flex flex-col gap-1 p-3   ">
-          <div className="flex flex-col gap-1  mt-auto ">
-            <div className="line-clamp-1 text-white text-xl font-semibold">
-              {movie?.title}
-            </div>
-
-            <div className="line-clamp-1 text-orange-300 text-sm font-semibold">
-              {movie?.tagline}
-            </div>
-            <div className="-mt-1 flex items-center gap-2">
-              <ReactStars
-                value={movie?.vote_average / 2}
-                isHalf={true}
-                count={5}
-                edit={false}
-                size={24}
-                activeColor="#ffd700"
-              />
-              <div className="text-[#ffd700]">
-                {movie?.vote_average?.toString().slice(0, 3)}
-              </div>
-            </div>
-            <div className="flex items-center gap-y-5 ">
-              {movie?.genres?.slice(0, 2).map((item, i) => (
-                <Tag key={i} color={getColorByGenre(item?.name)}>
-                  {item?.name}
-                </Tag>
-              ))}
-            </div>
-            <div className="text-white line-clamp-3 text-sm">
-              {movie?.overview}
-            </div>
-          </div>
-        </div>
-        <div className="w-full aspect-[9/14]  relative">
-          <Image
-            alt=""
-            className="object-cover object-center w-full h-full"
-            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`}
-            width={500}
-            height={500}
-            placeholder="blur"
-            blurDataURL={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`}
-            loading="lazy"
-          ></Image>
-        </div>
+    <Link
+      className="p-0 flex flex-col gap-2 group overflow-hidden "
+      href={`/movie-details/${movie.id}-${formattedTitle}`}
+    >
+      <div className="w-full aspect-[9/14]  relative">
+        <Image
+          alt=""
+          className="object-cover object-center w-full h-full rounded-2xl"
+          src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`}
+          width={500}
+          height={500}
+          placeholder="blur"
+          blurDataURL={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`}
+          loading="lazy"
+        ></Image>
+      </div>
+      <div className="w-full h-full absolute left-0 top-0 hidden group-hover:flex rounded-2xl bg-black/20 items-center justify-center">
+        <Button type="button" className="bg-mainDarkRed text-white">
+          See more
+        </Button>
       </div>
     </Link>
   );

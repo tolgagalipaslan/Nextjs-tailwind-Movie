@@ -9,9 +9,9 @@ const ArtistList = ({ artist }) => {
   return (
     <div className="container py-10">
       <Title>Popular Artist</Title>
-      <div className=" grid  grid-cols-5 md:grid-cols-10 items-center gap-2 md:gap-5 overflow-hidden  ">
+      <div className=" grid  grid-cols-6 md:grid-cols-12 items-center gap-2 md:gap-5 overflow-hidden  ">
         {artist?.length !== 0
-          ? newlist?.slice(0, 10).map(
+          ? newlist?.slice(0, 12).map(
               (item, i) =>
                 item?.profile_path && (
                   <Link
