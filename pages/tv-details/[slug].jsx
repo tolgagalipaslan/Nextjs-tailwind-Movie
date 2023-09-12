@@ -20,16 +20,18 @@ const TvDetails = ({ tv, cast, video }) => {
 export default TvDetails;
 
 export const getServerSideProps = async (context) => {
+  const slug = context.query.slug;
+  const id = slug.split("-")[0];
   try {
     const populatedMovieRes = await axios.get(
-      `https://api.themoviedb.org/3/tv/${context.query.slug}?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
+      `https://api.themoviedb.org/3/tv/${id}?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
     );
 
     const castAndCrewRes = await axios.get(
-      `https://api.themoviedb.org/3/tv/${context.query.slug}/credits?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
+      `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
     );
     const videoRes = await axios.get(
-      `https://api.themoviedb.org/3/tv/${context.query.slug}/videos?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
+      `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
     );
 
     return {

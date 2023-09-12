@@ -2,6 +2,7 @@ import { Avatar } from "antd";
 import React from "react";
 import Title from "../ui/Title";
 import Link from "next/link";
+import Image from "next/image";
 
 const ArtistList = ({ artist }) => {
   const newlist = artist?.filter((i) => i?.profile_path !== null);
@@ -18,10 +19,17 @@ const ArtistList = ({ artist }) => {
                       ?.toLowerCase()
                       .replace(/ /g, "-")}`}
                     key={i}
+                    className="w-full h-full aspect-square border-[2px] md:border-[4px] border-mainDarkRed cursor-pointer relative rounded-full"
                   >
-                    <Avatar
-                      className="w-full h-full aspect-square border-[2px] md:border-[4px] border-mainDarkRed cursor-pointer"
+                    <Image
+                      alt=""
+                      width={300}
+                      height={300}
+                      placeholder="blur"
+                      blurDataURL={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.profile_path}`}
+                      className="object-cover object-center rounded-full w-full h-full"
                       src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.profile_path}`}
+                      loading="lazy"
                     />
                   </Link>
                 )

@@ -6,7 +6,7 @@ import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 
-const Home = ({ artist, movies, castAndCrew, castAndCrewTvRes, tv }) => {
+const Home = ({ artist, movies, tv }) => {
   return (
     <div className=" ">
       <Head>
@@ -18,8 +18,8 @@ const Home = ({ artist, movies, castAndCrew, castAndCrewTvRes, tv }) => {
 
       <div className="flex flex-col pb-10">
         <ArtistList artist={artist} />
-        <PopularMovies movies={movies} castAndCrew={castAndCrew} />
-        <PopularTv tv={tv} castAndCrewTvRes={castAndCrewTvRes} />
+        <PopularMovies movies={movies} />
+        <PopularTv tv={tv} />
       </div>
     </div>
   );
@@ -34,57 +34,15 @@ export const getStaticProps = async () => {
       `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
     );
 
-    const populatedMovieRes = await Promise.all(
-      movieRes?.data?.results.map(async (element) => {
-        const res = await axios.get(
-          `https://api.themoviedb.org/3/movie/${element?.id}?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
-        );
-
-        return res?.data;
-      })
-    );
-
-    const castAndCrewRes = await Promise.all(
-      movieRes?.data?.results.map(async (element) => {
-        const res = await axios.get(
-          `https://api.themoviedb.org/3/movie/${element?.id}/credits?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
-        );
-
-        return res?.data;
-      })
-    );
-
     const tvRes = await axios.get(
       `https://api.themoviedb.org/3/tv/popular?language=en-US&page=1&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
-    );
-
-    const populatedTvRes = await Promise.all(
-      tvRes?.data?.results.map(async (element) => {
-        const res = await axios.get(
-          `https://api.themoviedb.org/3/tv/${element?.id}?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
-        );
-
-        return res?.data;
-      })
-    );
-    const castAndCrewTvRes = await Promise.all(
-      tvRes?.data?.results.map(async (element) => {
-        const res = await axios.get(
-          `https://api.themoviedb.org/3/tv/${element?.id}/credits?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
-        );
-
-        return res?.data;
-      })
     );
 
     return {
       props: {
         artist: artistRes?.data?.results,
-        movies: populatedMovieRes,
-        castAndCrew: castAndCrewRes,
+        movies: movieRes?.data?.results,
         tv: tvRes?.data?.results,
-        populatedTvRes: populatedTvRes,
-        castAndCrewTvRes: castAndCrewTvRes,
       },
     };
   } catch (error) {
@@ -93,10 +51,7 @@ export const getStaticProps = async () => {
       props: {
         artist: [],
         movies: [],
-        castAndCrewRes: [],
         tv: [],
-        populatedTvRes: [],
-        castAndCrewTvRes: [],
       },
     };
   }

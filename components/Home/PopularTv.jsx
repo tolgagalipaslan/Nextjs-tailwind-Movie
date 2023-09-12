@@ -8,10 +8,9 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper/modules";
 import Title from "../ui/Title";
-import MovieCard from "./MovieCard";
 import TvCard from "./TvCard";
 
-const PopularTv = ({ tv, castAndCrewTvRes }) => {
+const PopularTv = ({ tv }) => {
   return (
     <div className="overflow-hidden">
       <div className="container">
@@ -47,7 +46,7 @@ const PopularTv = ({ tv, castAndCrewTvRes }) => {
             (tv, i) =>
               tv?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <TvCard tv={tv} castAndCrewTvRes={castAndCrewTvRes} />
+                  <TvCard tv={tv} />
                 </SwiperSlide>
               )
           )}{" "}
@@ -55,7 +54,7 @@ const PopularTv = ({ tv, castAndCrewTvRes }) => {
             (tv, i) =>
               tv?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <TvCard tv={tv} castAndCrewTvRes={castAndCrewTvRes} />
+                  <TvCard tv={tv} />
                 </SwiperSlide>
               )
           )}{" "}
@@ -63,7 +62,7 @@ const PopularTv = ({ tv, castAndCrewTvRes }) => {
             (tv, i) =>
               tv?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <TvCard tv={tv} castAndCrewTvRes={castAndCrewTvRes} />
+                  <TvCard tv={tv} />
                 </SwiperSlide>
               )
           )}

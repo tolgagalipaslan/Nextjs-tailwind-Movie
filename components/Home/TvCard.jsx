@@ -1,12 +1,9 @@
 import { Avatar, Tag } from "antd";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-const TvCard = ({ tv, castAndCrewTvRes }) => {
-  const findCast = castAndCrewTvRes.filter((i) => {
-    return i.id == tv?.id;
-  });
-
+const TvCard = ({ tv }) => {
   const filmGenres = [
     { id: 28, name: "Action", color: "#f50" },
     { id: 12, name: "Adventure", color: "#00ccff" }, // Zıt renk: Mavi
@@ -81,32 +78,20 @@ const TvCard = ({ tv, castAndCrewTvRes }) => {
               )}
             </div>
             <div className="text-white line-clamp-3 text-sm">{tv.overview}</div>
-            {findCast[0]?.cast?.length !== 0 && (
-              <div className="text-yellow-200">Cast</div>
-            )}
-            <div className="grid grid-cols-5 gap-1">
-              {findCast[0]?.cast?.length !== 0
-                ? findCast[0]?.cast?.slice(0, 5).map(
-                    (item, i) =>
-                      item?.profile_path && (
-                        <div key={i}>
-                          <Avatar
-                            className="w-full h-full aspect-square border-[2px] border-mainWhite cursor-pointer"
-                            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.profile_path}`}
-                          />
-                        </div>
-                      )
-                  )
-                : null}
-            </div>
           </div>
         </div>
-        <div
-          className="w-full aspect-[9/14] bg-cover bg-center"
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv.backdrop_path})`,
-          }}
-        ></div>
+        <div className="w-full aspect-[9/14]  relative">
+          <Image
+            alt=""
+            className="object-cover object-center w-full h-full"
+            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
+            width={500}
+            height={500}
+            placeholder="blur"
+            blurDataURL={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
+            loading="lazy"
+          ></Image>
+        </div>
       </div>
     </Link>
   );
