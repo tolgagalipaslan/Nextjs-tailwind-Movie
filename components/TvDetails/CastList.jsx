@@ -60,7 +60,7 @@ const CastList = ({ cast }) => {
                         style={{
                           backgroundImage: `url(https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${cast?.profile_path})`,
                         }}
-                        className="w-full aspect-[9/12] bg-cover bg-center rounded-2xl"
+                        className="w-full aspect-[9/12] bg-cover bg-center rounded-md"
                       ></div>
                     </Link>
                   </SwiperSlide>

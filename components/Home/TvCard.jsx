@@ -1,8 +1,11 @@
-import { Avatar, Button, Tag } from "antd";
+import { Avatar, Button, Dropdown, Space, Tag } from "antd";
 import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
-import ReactStars from "react-rating-stars-component";
+import { AiFillHeart, AiFillStar } from "react-icons/ai";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { BsFillBookmarkPlusFill } from "react-icons/bs";
+
 const TvCard = ({ tv }) => {
   const filmGenres = [
     { id: 28, name: "Action", color: "#f50" },
@@ -27,34 +30,63 @@ const TvCard = ({ tv }) => {
     // Diğer türler için benzersiz zıt renkler ekleyebilirsiniz
   ];
 
-  function getColorByGenre(genreId) {
-    const foundGenre = filmGenres.find((genre) => genre.id === genreId);
-    if (foundGenre) {
-      return foundGenre.color;
-    } else {
-      // Eşleşen tür bulunamazsa varsayılan olarak "Action" rengini döndür
-      return "#f50";
-    }
-  }
-
-  const getGenre = (genreId) => {
-    const foundGenre = filmGenres.find((genre) => genre.id === genreId);
-    if (foundGenre) {
-      return foundGenre;
-    } else {
-      return false;
-    }
-  };
+  const items = [
+    {
+      label: (
+        <div className="flex items-center gap-1">
+          <BsFillBookmarkPlusFill className="text-lg" />
+          Add to watchlist
+        </div>
+      ),
+      key: "0",
+    },
+    {
+      label: (
+        <div className="flex items-center gap-1">
+          <AiFillHeart className="text-lg" />
+          Add to favorites
+        </div>
+      ),
+      key: "1",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: (
+        <div className="flex items-center gap-1">
+          <AiFillStar className="text-lg" />
+          Your rating
+        </div>
+      ),
+      key: "2",
+    },
+  ];
   const formattedName = tv?.name?.toLowerCase().replace(/ /g, "-");
   return (
-    <Link
-      className="p-0 flex flex-col gap-2 group overflow-hidden "
-      href={`/movie-details/${tv.id}-${formattedName}`}
-    >
-      <div className="w-full aspect-[9/14]  relative">
+    <div className="p-0 flex flex-col gap-2 group overflow-hidden relative  cursor-pointer ">
+      <div className="absolute top-2 right-2 z-30">
+        <Dropdown
+          menu={{
+            items,
+          }}
+          trigger={["click"]}
+          className="group-hover:opacity-100 opacity-0"
+        >
+          <div onClick={(e) => e.preventDefault()}>
+            <Space className="bg-white/80 text-2xl rounded-full hover:bg-blue-600 duration-300  ">
+              <BiDotsHorizontalRounded />
+            </Space>
+          </div>
+        </Dropdown>
+      </div>
+      <div
+        onClick={() => router.push(`/movie-details/${tv.id}-${formattedName}`)}
+        className="w-full aspect-[9/14]  relative"
+      >
         <Image
           alt=""
-          className="object-cover object-center w-full h-full rounded-2xl"
+          className="object-cover object-center w-full h-full rounded-md"
           src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
           width={500}
           height={500}
@@ -63,12 +95,15 @@ const TvCard = ({ tv }) => {
           loading="lazy"
         ></Image>
       </div>
-      <div className="w-full h-full absolute left-0 top-0 hidden group-hover:flex rounded-2xl bg-black/20 items-center justify-center">
+      <div
+        onClick={() => router.push(`/movie-details/${tv.id}-${formattedName}`)}
+        className="w-full h-full absolute left-0 top-0 hidden group-hover:flex rounded-md bg-black/20 items-center justify-center"
+      >
         <Button type="button" className="bg-mainDarkRed text-white">
           See more
         </Button>
       </div>
-    </Link>
+    </div>
   );
 };
 
