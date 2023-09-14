@@ -9,7 +9,6 @@ export default function Document() {
           name="description"
           content="Discover a world of thrilling ofenos movies on our English-language film platform. Explore the latest and most popular ofenos productions, and indulge in unlimited entertainment. Join now to start your journey into the world of excitement!"
         />
-        <meta name="robots" content="noindex" />
       </Head>
       <body>
         <Main />
