@@ -76,7 +76,7 @@ const People = ({ data }) => {
                   ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${person?.profile_path}`
                   : "/assets/default-img.png"
               }`}
-              alt="..."
+              alt={person?.name}
               loading="lazy"
             />
             <div className="p-3">

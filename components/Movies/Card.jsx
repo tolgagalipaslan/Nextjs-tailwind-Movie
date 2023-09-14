@@ -76,7 +76,7 @@ const Card = ({ movie }) => {
               ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie?.poster_path}`
               : "/assets/default-img.png"
           }`}
-          alt=""
+          alt={movie?.title}
           fill
           className="bg-[url(/assets/logo1.png)] bg-white bg-center object-center object-cover bg-cover bg-no-repeat"
         />

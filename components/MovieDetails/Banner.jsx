@@ -41,7 +41,7 @@ const Banner = ({ movie, cast, video }) => {
                   ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`
                   : "/assets/default-img.png"
               }`}
-              alt=""
+              alt={movie?.title}
             />
           </div>
           <div className="flex flex-col gap-3 text-white ">

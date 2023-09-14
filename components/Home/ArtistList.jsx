@@ -22,7 +22,7 @@ const ArtistList = ({ artist }) => {
                     className="w-full h-full aspect-square border-[2px] md:border-[4px] border-mainDarkRed cursor-pointer relative rounded-full"
                   >
                     <Image
-                      alt=""
+                      alt={item?.name}
                       width={300}
                       height={300}
                       placeholder="blur"

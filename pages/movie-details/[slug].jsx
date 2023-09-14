@@ -11,6 +11,7 @@ const MovieDetails = ({ movie, cast, video }) => {
     <div className=" ">
       <Head>
         <title>{movie?.title || "Ofenos"}</title>
+        <meta name="description" content={movie?.overview} />
       </Head>
       <div className="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 z-[-1] w-[80vh] aspect-square rounded-full blur-[150px] bg-mainWhite/50"></div>
       <Banner video={video} movie={movie} cast={cast} />

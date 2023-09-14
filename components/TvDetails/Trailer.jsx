@@ -134,7 +134,7 @@ const Trailer = ({ video, cast }) => {
                           className="object-contain "
                           fill
                           src={`https://img.youtube.com/vi/${video[i]?.key}/maxresdefault.jpg`}
-                          alt=" "
+                          alt={video[i]?.name}
                         />
                       </div>
                       <div className="flex flex-col w-full text-white">

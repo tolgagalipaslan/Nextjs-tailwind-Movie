@@ -41,7 +41,7 @@ const Banner = ({ person, personDetails }) => {
                     ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${person?.profile_path}`
                     : "/assets/default-img.png"
                 }`}
-                alt=""
+                alt={person?.name}
               />
             </div>
             <div className="flex flex-col gap-4">

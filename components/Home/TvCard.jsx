@@ -88,7 +88,7 @@ const TvCard = ({ tv }) => {
         className="w-full aspect-[9/14]  relative"
       >
         <Image
-          alt=""
+          alt={tv?.name}
           className="object-cover object-center w-full h-full rounded-md"
           src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${tv?.backdrop_path}`}
           width={500}

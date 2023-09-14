@@ -39,7 +39,7 @@ const Banner = () => {
               placeholder="blur"
               blurDataURL={`/assets/banner3.jpg`}
               src="/assets/banner3.jpg"
-              alt="..."
+              alt={"Venom"}
               loading="lazy"
             ></Image>
             <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40 swiper-box">
@@ -94,7 +94,7 @@ const Banner = () => {
               placeholder="blur"
               blurDataURL={`/assets/banner2.jpeg`}
               src="/assets/banner2.jpeg"
-              alt="..."
+              alt="Oppenheimer"
               loading="lazy"
             ></Image>
             <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40 swiper-box">
@@ -145,7 +145,7 @@ const Banner = () => {
               blurDataURL={`/assets/banner4.jpg`}
               src="/assets/banner4.jpg"
               loading="lazy"
-              alt="..."
+              alt="Heart of Stone"
             ></Image>
             <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 lg:top-1/2 top-[40%]  container text-white z-40 swiper-box">
               <div className="flex flex-col max-w-[500px] gap-5">

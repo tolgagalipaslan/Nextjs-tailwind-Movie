@@ -124,7 +124,7 @@ const Navbar = () => {
                   className="object-contain"
                   fill
                   src={"/assets/logo1.png"}
-                  alt="..."
+                  alt="Ofenos"
                 />
               </div>
               <div className=" text-transparent bg-clip-text bg-gradient-to-b text-3xl font-extrabold from-mainWhite to-mainDarkRed ml-[-5px]">

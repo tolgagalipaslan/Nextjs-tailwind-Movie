@@ -11,6 +11,7 @@ const TvDetails = ({ tv, cast, video }) => {
     <div className=" ">
       <Head>
         <title>{tv?.name || "Ofenos"}</title>
+        <meta name="description" content={tv?.overview} />
       </Head>
       <div className="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 top-1/2 z-[-1] w-[80vh] aspect-square rounded-full blur-[150px] bg-mainWhite/50"></div>
       <Banner video={video} tv={tv} cast={cast} />

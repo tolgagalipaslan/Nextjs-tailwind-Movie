@@ -124,7 +124,7 @@ const TvShows = ({ data }) => {
                   className="object-contain"
                   fill
                   src={"/assets/sad1.png"}
-                  alt=""
+                  alt={"Ofenos"}
                 ></Image>
               </div>
               <div>No items were found that match your query.</div>

@@ -35,6 +35,7 @@ const Comments = () => {
               <div className="flex gap-5 w-full">
                 <Avatar
                   src="/assets/default-pp.jpg"
+                  alt="User"
                   size={50}
                   className="aspect-square w-[50px] min-w-[50px]"
                 ></Avatar>
@@ -78,6 +79,7 @@ const Comments = () => {
               <div className="flex gap-5 w-full">
                 <Avatar
                   src="/assets/default-pp.jpg"
+                  alt="User"
                   size={50}
                   className="aspect-square w-[50px] min-w-[50px]"
                 ></Avatar>
@@ -116,6 +118,7 @@ const Comments = () => {
               <div className="flex  gap-5 w-full">
                 <Avatar
                   src="/assets/default-pp.jpg"
+                  alt="User"
                   size={50}
                   className="aspect-square w-[50px] min-w-[50px]"
                 ></Avatar>
@@ -162,6 +165,7 @@ const Comments = () => {
               <div className="flex gap-5 w-full">
                 <Avatar
                   src="/assets/default-pp.jpg"
+                  alt="User"
                   size={50}
                   className="aspect-square w-[50px] min-w-[50px]"
                 ></Avatar>
