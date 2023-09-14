@@ -23,37 +23,8 @@ function Footer() {
     pathname === "/auth/register";
   return (
     <div className={`bg-gray-800 text-white ${hideFooter ? "hidden" : ""} `}>
-      <div className="bg-mainBlack2">
-        <section className="flex container justify-between p-4 ">
-          <div className="mr-5">
-            <span>Get connected with us on social networks:</span>
-          </div>
-
-          <div className="flex items-center ">
-            <a href="#" className="text-white me-4">
-              <FaFacebookF />
-            </a>
-            <a href="#" className="text-white me-4">
-              <AiOutlineTwitter />
-            </a>
-            <a href="#" className="text-white me-4">
-              <BsInstagram />
-            </a>
-            <a href="#" className="text-white me-4">
-              <AiOutlineGoogle />
-            </a>
-            <a href="#" className="text-white me-4">
-              <AiFillLinkedin />
-            </a>
-            <a href="#" className="text-white me-4">
-              <AiOutlineGithub />
-            </a>
-          </div>
-        </section>
-      </div>
-
-      <section className="container my-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <section className="container py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
           <div className="mb-4">
             <Link href={"/"} className="flex items-center gap-2">
               <div className="relative w-[50px] aspect-square flex items-center gap-0">
@@ -76,7 +47,7 @@ function Footer() {
           </div>
 
           <div className="mb-4">
-            <h6 className="text-3xl font-bold h-[50px] flex items-center">
+            <h6 className="text-xl font-bold h-[50px] flex items-center">
               Products
             </h6>
             <hr className="mb-4  border-t-2 border-mainDarkRed" />
@@ -103,7 +74,7 @@ function Footer() {
           </div>
 
           <div className="mb-4">
-            <h6 className="text-3xl font-bold h-[50px] flex items-center">
+            <h6 className="text-xl font-bold h-[50px] flex items-center">
               Useful links
             </h6>
             <hr className="mb-4  border-t-2 border-mainDarkRed" />
@@ -130,7 +101,7 @@ function Footer() {
           </div>
 
           <div className="mb-4">
-            <h6 className="text-3xl font-bold h-[50px] flex items-center">
+            <h6 className="text-xl font-bold h-[50px] flex items-center">
               Contact
             </h6>
             <hr className="mb-4 border-t-2 border-mainDarkRed" />
@@ -150,11 +121,36 @@ function Footer() {
         </div>
       </section>
 
-      <div className="text-center py-3 bg-opacity-20 bg-black">
-        © 2020 Copyright :{" "}
-        <a className="text-white" href="https://mdbootstrap.com/">
-          Ofenos.com
-        </a>
+      <div className="bg-mainBlack2">
+        <div className="flex container items-center justify-between">
+          <div className="text-center py-3 bg-opacity-20 ">
+            © 2020 Copyright :{" "}
+            <a className="text-white" href="https://mdbootstrap.com/">
+              Ofenos.com
+            </a>
+          </div>
+
+          <div className="flex items-center ">
+            <a href="#" className="text-white me-4">
+              <FaFacebookF />
+            </a>
+            <a href="#" className="text-white me-4">
+              <AiOutlineTwitter />
+            </a>
+            <a href="#" className="text-white me-4">
+              <BsInstagram />
+            </a>
+            <a href="#" className="text-white me-4">
+              <AiOutlineGoogle />
+            </a>
+            <a href="#" className="text-white me-4">
+              <AiFillLinkedin />
+            </a>
+            <a href="#" className="text-white me-4">
+              <AiOutlineGithub />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -15,6 +15,9 @@ const Register = () => {
 
   return (
     <div className='h-screen w-full bg-[url("/assets/auth-bg.jpg")] bg-cover bg-center flex items-center justify-center p-3'>
+      <Head>
+        <title>Register</title>
+      </Head>
       <Button type="link" className="text-white absolute top-5 left-5 text-2xl">
         <BiArrowBack onClick={() => router.back()} />
       </Button>

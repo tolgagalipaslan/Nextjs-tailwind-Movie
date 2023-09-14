@@ -1,4 +1,5 @@
 import { Button, Divider, Form, Input } from "antd";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -15,6 +16,9 @@ const Login = () => {
 
   return (
     <div className='h-screen w-full bg-[url("/assets/auth-bg.jpg")] bg-cover bg-center flex items-center justify-center p-3'>
+      <Head>
+        <title>Login</title>
+      </Head>
       <Button type="link" className="text-white absolute top-5 left-5 text-2xl">
         <BiArrowBack onClick={() => router.back()} />
       </Button>

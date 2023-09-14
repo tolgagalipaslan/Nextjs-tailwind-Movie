@@ -1,5 +1,6 @@
 import { Avatar, Button, Dropdown, Space, Tag } from "antd";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import React from "react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
@@ -7,6 +8,8 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
 
 const TvCard = ({ tv }) => {
+  const router = useRouter();
+
   const filmGenres = [
     { id: 28, name: "Action", color: "#f50" },
     { id: 12, name: "Adventure", color: "#00ccff" }, // Zıt renk: Mavi
@@ -81,7 +84,7 @@ const TvCard = ({ tv }) => {
         </Dropdown>
       </div>
       <div
-        onClick={() => router.push(`/movie-details/${tv.id}-${formattedName}`)}
+        onClick={() => router.push(`/tv-details/${tv.id}-${formattedName}`)}
         className="w-full aspect-[9/14]  relative"
       >
         <Image
@@ -96,7 +99,7 @@ const TvCard = ({ tv }) => {
         ></Image>
       </div>
       <div
-        onClick={() => router.push(`/movie-details/${tv.id}-${formattedName}`)}
+        onClick={() => router.push(`/tv-details/${tv.id}-${formattedName}`)}
         className="w-full h-full absolute left-0 top-0 hidden group-hover:flex rounded-md bg-black/20 items-center justify-center"
       >
         <Button type="button" className="bg-mainDarkRed text-white">

@@ -35,9 +35,11 @@ const Banner = ({ movie, cast, video }) => {
               className=" "
               fill
               src={`${
-                movie?.poster_path === null
-                  ? "/assets/default-img.png"
-                  : `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.poster_path}`
+                movie?.poster_path !== null
+                  ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.poster_path}`
+                  : movie?.backdrop_path === null
+                  ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`
+                  : "/assets/default-img.png"
               }`}
               alt=""
             />

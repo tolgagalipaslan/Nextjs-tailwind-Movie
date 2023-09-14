@@ -7,7 +7,8 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
-const Card = ({ movie }) => {
+
+const Card = ({ tv }) => {
   const router = useRouter();
   const items = [
     {
@@ -42,7 +43,7 @@ const Card = ({ movie }) => {
     },
   ];
   return (
-    <div className="w-full group relative cursor-pointer flex items-center sm:items-start flex-row sm:flex-col  rounded sm:rounded-xl overflow-hidden h-full bg-cover bg-mainBlack2">
+    <div className="w-full cursor-pointer flex group items-center sm:items-start flex-row sm:flex-col relative rounded sm:rounded-xl overflow-hidden h-full bg-cover bg-mainBlack2">
       <div className="absolute top-2 right-2 z-30">
         <Dropdown
           menu={{
@@ -61,19 +62,17 @@ const Card = ({ movie }) => {
       <div
         onClick={() =>
           router.push(
-            `/movie-details/${movie.id}-${movie?.title
-              ?.toLowerCase()
-              .replace(/ /g, "-")}`
+            `/tv-details/${tv.id}-${tv?.name?.toLowerCase().replace(/ /g, "-")}`
           )
         }
         className="relative h-[160px] sm:h-auto  sm:w-full aspect-[9/12] sm:aspect-[9/11] "
       >
         <Image
           src={`${
-            movie?.backdrop_path
-              ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie?.backdrop_path}`
-              : movie?.poster_path
-              ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie?.poster_path}`
+            tv?.backdrop_path
+              ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tv?.backdrop_path}`
+              : tv?.poster_path
+              ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${tv?.poster_path}`
               : "/assets/default-img.png"
           }`}
           alt=""
@@ -83,51 +82,49 @@ const Card = ({ movie }) => {
         <CircularProgressbar
           styles={buildStyles({
             textColor:
-              movie?.vote_average > 7
+              tv?.vote_average > 7
                 ? "#21d07a"
-                : movie?.vote_average > 4
+                : tv?.vote_average > 4
                 ? "#d2d531"
-                : movie?.vote_average === 0
+                : tv?.vote_average === 0
                 ? "#838383"
                 : "#db2360 ",
             pathColor:
-              movie?.vote_average > 7
+              tv?.vote_average > 7
                 ? "#21d07a"
-                : movie?.vote_average > 4
+                : tv?.vote_average > 4
                 ? "#d2d531"
-                : movie?.vote_average === 0
+                : tv?.vote_average === 0
                 ? "#838383"
                 : "#db2360 ",
             trailColor:
-              movie?.vote_average > 7
+              tv?.vote_average > 7
                 ? "#204529"
-                : movie?.vote_average > 4
+                : tv?.vote_average > 4
                 ? "#423d0f"
-                : movie?.vote_average === 0
+                : tv?.vote_average === 0
                 ? "#838383"
                 : "#571435 ",
           })}
           className="w-14 h-14  items-center justify-center bg-mainBlack2 p-1 rounded-full font-semibold hidden sm:flex absolute -bottom-7 right-3 z-20"
-          value={movie?.vote_average * 10}
-          text={`${(movie?.vote_average * 10).toString()?.slice(0, 5)}%`}
+          value={tv?.vote_average * 10}
+          text={`${(tv?.vote_average * 10).toString()?.slice(0, 5)}%`}
         />
       </div>
 
       <div
         onClick={() =>
           router.push(
-            `/movie-details/${movie.id}-${movie?.title
-              ?.toLowerCase()
-              .replace(/ /g, "-")}`
+            `/tv-details/${tv.id}-${tv?.name?.toLowerCase().replace(/ /g, "-")}`
           )
         }
         className=" p-5 pt-8 flex flex-col gap-1 text-white"
       >
-        <div className="font-semibold line-clamp-1">{movie?.title}</div>
-        <div className="text-mainWhite/60">{movie?.release_date}</div>
+        <div className="font-semibold line-clamp-1">{tv?.name}</div>
+        <div className="text-mainWhite/60">{tv?.first_air_date}</div>
 
         <div className="text-mainWhite sm:hidden line-clamp-2">
-          {movie?.overview}
+          {tv?.overview}
         </div>
       </div>
     </div>

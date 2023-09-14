@@ -6,11 +6,12 @@ import React, { useEffect, useRef, useState } from "react";
 import "react-circular-progressbar/dist/styles.css";
 
 import { Router, useRouter } from "next/router";
-import Card from "@/components/Movies/Card";
-import SideBar from "@/components/Movies/SideBar";
+import SideBar from "@/components/TvShows/SideBar";
+import Card from "@/components/TvShows/Card";
 import Head from "next/head";
-const Movies = ({ data }) => {
-  const [movies, setMovies] = useState(data);
+
+const TvShows = ({ data }) => {
+  const [tvShows, setTvShows] = useState(data);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("popularity.desc");
   const [lang, setLang] = useState("");
@@ -35,7 +36,7 @@ const Movies = ({ data }) => {
   const handleLoadMore = async () => {
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${
+        `https://api.themoviedb.org/3/discover/tv?api_key=${
           process.env.NEXT_PUBLIC_TMDB_KEY
         }&page=${page + 1}${sort ? `&sort_by=${sort}` : null}${
           genreList?.length !== 0
@@ -45,7 +46,7 @@ const Movies = ({ data }) => {
       );
       setPage(page + 1);
 
-      setMovies([...movies, ...res?.data?.results]);
+      setTvShows([...tvShows, ...res?.data?.results]);
       if (res?.data?.results?.length < 20) {
         setHideLoadBtn(true);
       } else {
@@ -94,7 +95,7 @@ const Movies = ({ data }) => {
   return (
     <div className="bg-[url('/assets/auth-bg.jpg')] bg-fill pt-[75px] -mt-[65px]">
       <Head>
-        <title>Movies</title>
+        <title>Tv Shows</title>
       </Head>
       <div className="container flex flex-col md:flex-row gap-5 min-h-screen pb-10">
         <SideBar
@@ -110,13 +111,13 @@ const Movies = ({ data }) => {
           setGenreList={setGenreList}
           avarageVote={avarageVote}
           setAvarageVote={setAvarageVote}
-          setMovies={setMovies}
+          setTvShows={setTvShows}
           setHideLoadBtn={setHideLoadBtn}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
         />
         <div className="w-full md:w-[77%] ">
-          {movies?.length === 0 ? (
+          {tvShows?.length === 0 ? (
             <div className="flex h-full text-white items-center flex-col gap-3">
               <div className="w-[300px] relative h-[300px] ">
                 <Image
@@ -130,8 +131,8 @@ const Movies = ({ data }) => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  gap-5">
-              {movies?.map((movie, i) => (
-                <Card movie={movie} key={i} />
+              {tvShows?.map((tv, i) => (
+                <Card tv={tv} key={i} />
               ))}
             </div>
           )}
@@ -152,12 +153,12 @@ const Movies = ({ data }) => {
   );
 };
 
-export default Movies;
+export default TvShows;
 
 export const getStaticProps = async () => {
   try {
     const res = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&page=1`
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}&page=1`
     );
 
     return {

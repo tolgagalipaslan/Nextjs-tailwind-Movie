@@ -145,7 +145,7 @@ const Navbar = () => {
                 Movies
               </Link>
               <Link
-                href={"/"}
+                href={"/tv-shows"}
                 className={`font-semibold hover:text-mainDarkRed duration-300 ${
                   pathname === "/tv-shows" ? "text-mainDarkRed" : ""
                 }`}
@@ -153,20 +153,12 @@ const Navbar = () => {
                 Tv Shows
               </Link>{" "}
               <Link
-                href={"/"}
+                href={"/people"}
                 className={`font-semibold hover:text-mainDarkRed duration-300 ${
                   pathname === "/people" ? "text-mainDarkRed" : ""
                 }`}
               >
                 People
-              </Link>
-              <Link
-                href={"/"}
-                className={`font-semibold hover:text-mainDarkRed duration-300 ${
-                  pathname === "/people" ? "text-mainDarkRed" : ""
-                }`}
-              >
-                My Favories
               </Link>
             </div>
           </div>

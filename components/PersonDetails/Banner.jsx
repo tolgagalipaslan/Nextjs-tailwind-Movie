@@ -28,8 +28,8 @@ const Banner = ({ person, personDetails }) => {
   };
 
   return (
-    <div className="h-fit py-5  w-full  bg-cover bg-center  ">
-      <div className="container  bg-mainBlack2 p-3 md:p-5 rounded-2xl">
+    <div className="h-fit py-5  w-full    bg-[url('/assets/auth-bg.jpg')] -mt-[65px] pt-[65px] bg-cover bg-center">
+      <div className="container  bg-mainBlack2/80 p-3 md:p-5 rounded-2xl">
         <div className="flex flex-col md:flex-row w-full text-white gap-5">
           <div className="flex flex-col gap-5">
             <div className="relative mx-auto md:mx-0 rounded-2xl overflow-hidden h-fit aspect-square md:aspect-[4/6] w-[200px] md:min-w-[300px] ">
@@ -117,7 +117,7 @@ const Banner = ({ person, personDetails }) => {
             </div>
 
             {person?.known_for?.length !== 0 ? (
-              <div className="flex flex-col gap-2 ">
+              <div className="flex flex-col gap-2  mt-auto">
                 <div className="text-2xl">Known For</div>
                 <div className="flex gap-3">
                   {person?.known_for?.map((item, i) => (
@@ -134,7 +134,7 @@ const Banner = ({ person, personDetails }) => {
                           : null
                       }`}
                       key={i}
-                      className="bg-cover w-[130px] bg-center aspect-[9/14] rounded-2xl"
+                      className="bg-cover w-full bg-center aspect-[9/14] rounded-2xl"
                       style={{
                         backgroundImage: `url(https://image.tmdb.org/t/p/w600_and_h900_bestv2/${item?.poster_path})`,
                       }}

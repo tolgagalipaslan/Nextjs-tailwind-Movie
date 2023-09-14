@@ -219,6 +219,21 @@ html {
   @apply bg-mainBlack2 text-white hover:text-white;
 }
 
+/* width */
+.castlist-scroll::-webkit-scrollbar {
+  @apply h-2 rounded-full;
+}
+
+/* Track */
+.castlist-scroll::-webkit-scrollbar-track {
+  @apply rounded-full;
+}
+
+/* Handle */
+.castlist-scroll::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-mainBlack2;
+}
+
 /*
 =========================
   Details End

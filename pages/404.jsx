@@ -1,4 +1,5 @@
 import { Button } from "antd";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -7,6 +8,9 @@ const NotFoundPage = () => {
   const router = useRouter();
   return (
     <div className="min-h-screen bg-[url('/assets/auth-bg.jpg')] bg-center bg-cover flex items-center justify-center md:p-5 p-3">
+      <Head>
+        <title>Ofenos Movies</title>
+      </Head>
       <div className="flex flex-col item gap-4">
         <div className="text-[150px] md:text-[250px] text-center from-[#544a7d] to-[#ffd452]   text-transparent bg-clip-text bg-gradient-to-r -my-10 md:-my-20">
           404
