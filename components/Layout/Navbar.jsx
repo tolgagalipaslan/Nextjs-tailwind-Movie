@@ -133,7 +133,6 @@ const Navbar = () => {
       ),
       key: "1",
     },
-
     {
       label: (
         <Link className="flex items-center gap-1 pr-6" href={"/"}>
@@ -310,6 +309,7 @@ const Navbar = () => {
                   if (item?.media_type === "movie") {
                     return (
                       <Link
+                        key={i}
                         href={`/movie-details/${item?.id}-${item?.title
                           ?.toLowerCase()
                           .replace(/ /g, "-")}`}
@@ -335,6 +335,7 @@ const Navbar = () => {
                   } else if (item?.media_type === "tv") {
                     return (
                       <Link
+                        key={i}
                         href={`/tv-details/${item?.id}-${item?.name
                           ?.toLowerCase()
                           .replace(/ /g, "-")}`}
@@ -360,6 +361,7 @@ const Navbar = () => {
                   } else if (item?.media_type === "person") {
                     return (
                       <Link
+                        key={i}
                         href={`/person/${item?.name
                           ?.toLowerCase()
                           .replace(/ /g, "-")}`}

@@ -16,10 +16,10 @@ const NotFoundPage = () => {
           404
         </div>
         <div className="text-lg text-white text-center">
-          You sure look lost but it's okay it can happen to anyone.
+          You sure look lost but its okay it can happen to anyone.
         </div>{" "}
         <div className="text-md text-gray-300/90 max-w-[500px] text-center">
-          "404 Not Found" is an HTTP response code that indicates a web page
+          404 Not Found is an HTTP response code that indicates a web page
           cannot be located on the server. This error often results from an
           incorrect URL or a request for a non-existent page.
         </div>
