@@ -5,13 +5,13 @@ import Router, { useRouter } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useEffect, useState } from "react";
-
+import { SessionProvider } from "next-auth/react";
 //Page loading animation
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, session }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,13 +21,15 @@ export default function App({ Component, pageProps }) {
     }, 1000);
   }, []);
   return (
-    <div
-      className={`${loading ? "overflow-hidden h-screen max-h-screen" : ""}`}
-    >
-      <Layout>
-        <Component {...pageProps} />
-        <Loading loading={loading} />
-      </Layout>
-    </div>
+    <SessionProvider session={session}>
+      <div
+        className={`${loading ? "overflow-hidden h-screen max-h-screen" : ""}`}
+      >
+        <Layout>
+          <Component {...pageProps} />
+          <Loading loading={loading} />
+        </Layout>
+      </div>
+    </SessionProvider>
   );
 }

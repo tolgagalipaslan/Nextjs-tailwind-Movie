@@ -1,14 +1,20 @@
 import useScrollPast65px from "@/hooks/scrollPast65px";
-import { Button, Input } from "antd";
+import { Button, Dropdown, Input, Space } from "antd";
 import axios from "axios";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
-import { BsFillPersonFill, BsTv } from "react-icons/bs";
+import {
+  AiOutlineClose,
+  AiOutlineHeart,
+  AiOutlineSearch,
+} from "react-icons/ai";
+import { BsBookmarkPlus, BsFillPersonFill, BsTv } from "react-icons/bs";
+import { FiSettings } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdLocalMovies } from "react-icons/md";
+import { MdLocalMovies, MdOutlineLogout } from "react-icons/md";
 const Navbar = () => {
   const [mobilNavOpen, setMobilNavOpen] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -21,6 +27,8 @@ const Navbar = () => {
   const searchInputRef = useRef(null);
   const searchWrapperRef = useRef(null);
   const searchBtnRef = useRef(null);
+
+  const { data: session } = useSession();
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -108,6 +116,48 @@ const Navbar = () => {
     pathname === "/auth/login" ||
     pathname === "/auth/register";
 
+  const items = [
+    {
+      label: (
+        <Link className="flex items-center gap-1 pr-6" href={"/"}>
+          <AiOutlineHeart className="text-lg" /> Favorites
+        </Link>
+      ),
+      key: "0",
+    },
+    {
+      label: (
+        <Link className="flex items-center gap-1 pr-6" href={"/"}>
+          <BsBookmarkPlus className="text-lg" /> Watchlist
+        </Link>
+      ),
+      key: "1",
+    },
+
+    {
+      label: (
+        <Link className="flex items-center gap-1 pr-6" href={"/"}>
+          <FiSettings className="text-lg" /> Settings
+        </Link>
+      ),
+      key: "3",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: (
+        <div
+          onClick={() => signOut()}
+          className="flex items-center gap-1 cursor-pointer pr-6"
+        >
+          <MdOutlineLogout className="text-lg" /> Logout
+        </div>
+      ),
+      key: "4",
+    },
+  ];
+
   return (
     <div className={`${hideNavbar ? "hidden" : ""}`}>
       <div
@@ -173,13 +223,35 @@ const Navbar = () => {
             >
               <AiOutlineSearch />
             </button>
-            <Button
-              onClick={() => router.push("/auth/login")}
-              type="button"
-              className="bg-mainDarkRed text-white"
-            >
-              Login
-            </Button>
+            {session ? (
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                trigger={["click"]}
+                arrow
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <div className="w-10 cursor-pointer aspect-square rounded-full overflow-hidden relative">
+                    <Image
+                      fill
+                      src={session?.user?.image}
+                      className="object-cover object-center"
+                      alt={session?.user?.username || "user"}
+                    />
+                  </div>
+                </a>
+              </Dropdown>
+            ) : (
+              <Button
+                onClick={() => router.push("/auth/login")}
+                type="button"
+                className="bg-mainDarkRed text-white"
+              >
+                Login
+              </Button>
+            )}
+
             <Button
               onClick={() => setMobilNavOpen(!mobilNavOpen)}
               type="button"
@@ -213,7 +285,7 @@ const Navbar = () => {
                 ref={searchInputRef}
                 onPressEnter={() => handlePressEnter()}
                 placeholder="Search for a movie, tv show, person..."
-                className="w-full rounded-none h-full search-input !px-8"
+                className="w-full rounded-none h-[44px] search-input !px-8 border-none"
               />
               <Button
                 className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black hover:black"

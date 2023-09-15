@@ -4,7 +4,6 @@ import PopularMovies from "@/components/Home/PopularMovies";
 import PopularTv from "@/components/Home/PopularTv";
 import axios from "axios";
 import Head from "next/head";
-import Link from "next/link";
 
 const Home = ({ artist, movies, tv }) => {
   return (

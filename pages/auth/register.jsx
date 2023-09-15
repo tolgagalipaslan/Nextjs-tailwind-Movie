@@ -1,4 +1,5 @@
 import { Button, Divider, Form, Input } from "antd";
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -43,7 +44,7 @@ const Register = () => {
             ]}
           >
             <Input
-              htmlType="email"
+              htmltype="email"
               className="w-[328px] h-[42px] rounded-none"
             />
           </Form.Item>
@@ -57,7 +58,10 @@ const Register = () => {
               },
             ]}
           >
-            <Input className="w-[328px] h-[42px] rounded-none" />
+            <Input
+              htmltype="input"
+              className="w-[328px] h-[42px] rounded-none"
+            />
           </Form.Item>
 
           <Form.Item
@@ -70,14 +74,17 @@ const Register = () => {
               },
             ]}
           >
-            <Input.Password className="w-[328px] h-[42px] rounded-none" />
+            <Input.Password
+              htmltype="input"
+              className="w-[328px] h-[42px] rounded-none"
+            />
           </Form.Item>
 
           <Form.Item>
             <Button
               type="button"
               className="bg-mainDarkRed h-[42px] font-semibold text-white rounded-none w-full"
-              htmlType="submit"
+              htmltype="submit"
             >
               Register
             </Button>
@@ -85,6 +92,8 @@ const Register = () => {
         </Form>
         <Divider plain>Or</Divider>
         <Button
+          htmltype="button"
+          onClick={() => signIn("google")}
           className="bg-[#4889f4] p-1   h-[42px] text-white rounded-sm w-full  flex gap-3 items-center "
           type="button"
         >

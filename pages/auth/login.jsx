@@ -6,9 +6,11 @@ import React from "react";
 
 import { BiArrowBack } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
-
+import { signIn, signOut, useSession } from "next-auth/react";
 const Login = () => {
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -19,7 +21,11 @@ const Login = () => {
       <Head>
         <title>Login</title>
       </Head>
-      <Button type="link" className="text-white absolute top-5 left-5 text-2xl">
+      <Button
+        htmltype="button"
+        type="link"
+        className="text-white absolute top-5 left-5 text-2xl"
+      >
         <BiArrowBack onClick={() => router.back()} />
       </Button>
 
@@ -43,7 +49,7 @@ const Login = () => {
             ]}
           >
             <Input
-              htmlType="email"
+              htmltype="email"
               className="w-[328px] h-[42px] rounded-none"
             />
           </Form.Item>
@@ -58,14 +64,17 @@ const Login = () => {
               },
             ]}
           >
-            <Input.Password className="w-[328px] h-[42px] rounded-none" />
+            <Input.Password
+              htmltype="input"
+              className="w-[328px] h-[42px] rounded-none"
+            />
           </Form.Item>
 
           <Form.Item>
             <Button
               type="button"
               className="bg-mainDarkRed h-[42px] font-semibold text-white rounded-none w-full"
-              htmlType="submit"
+              htmltype="submit"
             >
               Login
             </Button>
@@ -73,6 +82,8 @@ const Login = () => {
         </Form>
         <Divider plain>Or</Divider>
         <Button
+          htmltype="button"
+          onClick={() => signIn("google")}
           className="bg-[#4889f4] p-1   h-[42px] text-white rounded-sm w-full  flex gap-3 items-center "
           type="button"
         >
