@@ -1,4 +1,6 @@
-import { Dropdown, Space } from "antd";
+import { Dropdown, Space, message } from "antd";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,12 +11,31 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
 const Card = ({ movie }) => {
   const router = useRouter();
+  const { data: session } = useSession();
+
+  const handleAddWatchListItem = async () => {
+    try {
+      const res = await axios.post(`/api/watchList`, {
+        userId: session?.user?.id,
+        item: movie,
+      });
+      console.log(res?.data?.watchList);
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    }
+  };
+
   const items = [
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div
+          onClick={() => handleAddWatchListItem()}
+          className="flex items-center gap-1"
+        >
           <BsFillBookmarkPlusFill className="text-lg" />
-          Add to watchlist
+          Watchlist
         </div>
       ),
       key: "0",
@@ -23,7 +44,7 @@ const Card = ({ movie }) => {
       label: (
         <div className="flex items-center gap-1">
           <AiFillHeart className="text-lg" />
-          Add to favorites
+          Favorites
         </div>
       ),
       key: "1",

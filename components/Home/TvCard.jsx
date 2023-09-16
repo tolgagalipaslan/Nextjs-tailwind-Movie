@@ -38,7 +38,7 @@ const TvCard = ({ tv }) => {
       label: (
         <div className="flex items-center gap-1">
           <BsFillBookmarkPlusFill className="text-lg" />
-          Add to watchlist
+          Watchlist
         </div>
       ),
       key: "0",
@@ -47,7 +47,7 @@ const TvCard = ({ tv }) => {
       label: (
         <div className="flex items-center gap-1">
           <AiFillHeart className="text-lg" />
-          Add to favorites
+          Favorites
         </div>
       ),
       key: "1",

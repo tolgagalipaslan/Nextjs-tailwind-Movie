@@ -119,7 +119,7 @@ const Navbar = () => {
   const items = [
     {
       label: (
-        <Link className="flex items-center gap-1 pr-6" href={"/"}>
+        <Link className="flex items-center gap-1 pr-6" href={"/favorites"}>
           <AiOutlineHeart className="text-lg" /> Favorites
         </Link>
       ),
@@ -127,7 +127,7 @@ const Navbar = () => {
     },
     {
       label: (
-        <Link className="flex items-center gap-1 pr-6" href={"/"}>
+        <Link className="flex items-center gap-1 pr-6" href={"/watchlist"}>
           <BsBookmarkPlus className="text-lg" /> Watchlist
         </Link>
       ),
@@ -135,7 +135,7 @@ const Navbar = () => {
     },
     {
       label: (
-        <Link className="flex items-center gap-1 pr-6" href={"/"}>
+        <Link className="flex items-center gap-1 pr-6" href={"/settings"}>
           <FiSettings className="text-lg" /> Settings
         </Link>
       ),
@@ -185,6 +185,14 @@ const Navbar = () => {
                 mobilNavOpen ? "h-[176px] pb-5" : "h-0"
               } lg:h-fit overflow-hidden flex flex-col justify-center w-full items-center gap-5 absolute top-[65px] left-0 lg:relative lg:top-auto lg:left-auto lg:w-fit lg:justify-start lg:flex-row bg-mainBlack2 lg:bg-transparent lg:pb-0 duration-300 `}
             >
+              <Link
+                href={"/"}
+                className={`font-semibold hover:text-mainDarkRed duration-300 ${
+                  pathname === "/" ? "text-mainDarkRed" : ""
+                }`}
+              >
+                Home
+              </Link>
               <Link
                 href={"/movies"}
                 className={`font-semibold hover:text-mainDarkRed duration-300 ${

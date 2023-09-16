@@ -4,9 +4,19 @@ import { NextResponse } from "next/server";
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
   const sessionToken = await getToken({ req: request, type: "csrf" });
+  const { pathname } = request?.nextUrl;
+
+  const withoutAuthenticationLinks = ["/auth/login", "/auth/register"];
+  const withAuthenticationLinks = ["/favorites", "/watchlist", "/settings"];
 
   if (sessionToken) {
-    return NextResponse.redirect(new URL("/", request.url));
+    if (withoutAuthenticationLinks?.includes(pathname)) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  } else {
+    if (withAuthenticationLinks?.includes(pathname)) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 }
 
@@ -17,5 +27,11 @@ export const config = {
     "/lib/utilities.js",
     "/node_modules/function-bind/**",
   ],
-  matcher: ["/auth/login", "/auth/register"],
+  matcher: [
+    "/auth/login",
+    "/auth/register",
+    "/favorites",
+    "/watchlist",
+    "/settings",
+  ],
 };

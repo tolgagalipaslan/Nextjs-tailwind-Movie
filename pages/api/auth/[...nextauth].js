@@ -88,6 +88,7 @@ export const authOptions = {
         await dbConnect();
 
         const isExistUser = await User.findOne({ email: profile?.email });
+
         if (isExistUser) {
           if (isExistUser?.provider === "google") {
             return {
@@ -124,14 +125,33 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn(user, account, profile) {
-      // Özel oturum açma işlemlerinizi burada yapabilirsiniz
+    session({ session, token }) {
+      session.user.image = token.image;
+      session.user.username = token.username;
+      session.user.email = token.email;
+      session.user.id = token.id;
 
-      return true;
+      return session;
+    },
+    jwt: async ({ token, user, trigger, session }) => {
+      if (trigger === "update") {
+        return { ...token, ...session.user };
+      } else if (user) {
+        token.image = user.image;
+        token.username = user.username;
+        token.email = user.email;
+        token.id = user.id;
+      }
+
+      return Promise.resolve(token);
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
     },
   },
   session: {
     jwt: true,
+    strategy: "jwt",
   },
 };
 
