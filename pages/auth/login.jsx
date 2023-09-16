@@ -1,19 +1,44 @@
-import { Button, Divider, Form, Input } from "antd";
+import { Button, Divider, Form, Input, message } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 import { BiArrowBack } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const Login = () => {
+  const [googleIsLoading, setGoogleIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const { data: session } = useSession();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    try {
+      setIsLoading(true);
+
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+        type: "login",
+      });
+      if (res?.status === 200) {
+        router.push("/");
+      } else {
+        message.error(res?.error);
+      }
+    } catch (error) {
+      message.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const googleAuth = async () => {
+    setGoogleIsLoading(true);
+    await signIn("google");
   };
 
   return (
@@ -74,25 +99,37 @@ const Login = () => {
             <Button
               type="button"
               className="bg-mainDarkRed h-[42px] font-semibold text-white rounded-none w-full"
-              htmltype="submit"
+              htmlType="submit"
+              disabled={googleIsLoading || isLoading}
             >
-              Login
+              {isLoading ? (
+                <AiOutlineLoading3Quarters className="text-white mx-auto text-xl animate-spin" />
+              ) : (
+                "Login"
+              )}
             </Button>
           </Form.Item>
         </Form>
         <Divider plain>Or</Divider>
         <Button
           htmltype="button"
-          onClick={() => signIn("google")}
+          onClick={() => {
+            googleAuth();
+          }}
           className="bg-[#4889f4] p-1   h-[42px] text-white rounded-sm w-full  flex gap-3 items-center "
           type="button"
+          disabled={googleIsLoading || isLoading}
         >
           <div className="bg-white left-[2px] absolute h-[90%] flex items-center justify-center text-2xl aspect-square rounded-sm">
             <FcGoogle className="" />
           </div>
 
           <div className="text-white w-full text-center font-semibold">
-            Sing in with google
+            {googleIsLoading ? (
+              <AiOutlineLoading3Quarters className="text-white mx-auto text-xl animate-spin" />
+            ) : (
+              "Sing in with google"
+            )}
           </div>
         </Button>
         <div className="text-sm text-center pt-5">

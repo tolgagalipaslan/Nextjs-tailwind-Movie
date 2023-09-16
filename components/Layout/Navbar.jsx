@@ -242,13 +242,22 @@ const Navbar = () => {
                 </a>
               </Dropdown>
             ) : (
-              <Button
-                onClick={() => router.push("/auth/login")}
-                type="button"
-                className="bg-mainDarkRed text-white"
-              >
-                Login
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={() => router.push("/auth/login")}
+                  type="link"
+                  className="bg-mainLightRed text-white"
+                >
+                  Login
+                </Button>
+                <Button
+                  onClick={() => router.push("/auth/register")}
+                  type="link"
+                  className="bg-emerald-500 text-white"
+                >
+                  Sing up
+                </Button>
+              </div>
             )}
 
             <Button
@@ -284,7 +293,7 @@ const Navbar = () => {
                 ref={searchInputRef}
                 onPressEnter={() => handlePressEnter()}
                 placeholder="Search for a movie, tv show, person..."
-                className="w-full rounded-none h-[44px] search-input !px-8 border-none"
+                className="w-full rounded-none h-[44px] search-input !px-8 border-none focus:!shadow-none"
               />
               <Button
                 className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black hover:black"

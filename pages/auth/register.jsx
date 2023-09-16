@@ -1,18 +1,69 @@
-import { Button, Divider, Form, Input } from "antd";
-import { signIn } from "next-auth/react";
+import { Button, Divider, Form, Input, message } from "antd";
+import axios from "axios";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/dist/server/api-utils";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import { BiArrowBack } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
+  const [googleIsLoading, setGoogleIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [emailIsValid, setEmailIsValid] = useState(null);
   const router = useRouter();
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const { data: session } = useSession();
+
+  const onFinish = async (values) => {
+    try {
+      setIsLoading(true);
+      if (emailIsValid === "success") {
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: values.email,
+          password: values.password,
+          username: values.username,
+          type: "register",
+        });
+        if (res?.status === 200) {
+          router.push("/");
+        } else {
+          message.error(res?.error);
+        }
+      }
+    } catch (error) {
+      message.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const googleAuth = async () => {
+    setGoogleIsLoading(true);
+    await signIn("google");
+  };
+
+  const handleEmailCheck = async (e) => {
+    try {
+      setEmailIsValid("validating");
+      const res = await axios.post(`/api/isValidEmail`, {
+        email: e.target.value?.trim(),
+      });
+
+      if (res?.data?.valid) {
+        setEmailIsValid("success");
+      } else {
+        setEmailIsValid("error");
+      }
+    } catch (error) {
+      console.log(error);
+      setEmailIsValid("error");
+    }
   };
 
   return (
@@ -33,22 +84,6 @@ const Register = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                type: "email",
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input
-              htmltype="email"
-              className="w-[328px] h-[42px] rounded-none"
-            />
-          </Form.Item>
-          <Form.Item
             label="Username"
             name="username"
             rules={[
@@ -60,6 +95,28 @@ const Register = () => {
           >
             <Input
               htmltype="input"
+              className="w-[328px] h-[42px] rounded-none"
+            />
+          </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            hasFeedback
+            validateStatus={emailIsValid}
+            help={`${
+              emailIsValid === "error" ? "This email is already use" : ""
+            }`}
+            rules={[
+              {
+                type: "email",
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+          >
+            <Input
+              htmltype="email"
+              onBlur={(e) => handleEmailCheck(e)}
               className="w-[328px] h-[42px] rounded-none"
             />
           </Form.Item>
@@ -83,26 +140,36 @@ const Register = () => {
           <Form.Item>
             <Button
               type="button"
+              disabled={emailIsValid === "error" || isLoading}
               className="bg-mainDarkRed h-[42px] font-semibold text-white rounded-none w-full"
-              htmltype="submit"
+              htmlType="submit"
             >
-              Register
+              {isLoading ? (
+                <AiOutlineLoading3Quarters className="text-white mx-auto text-xl animate-spin" />
+              ) : (
+                "Register"
+              )}
             </Button>
           </Form.Item>
         </Form>
         <Divider plain>Or</Divider>
         <Button
           htmltype="button"
-          onClick={() => signIn("google")}
+          onClick={() => googleAuth()}
           className="bg-[#4889f4] p-1   h-[42px] text-white rounded-sm w-full  flex gap-3 items-center "
           type="button"
+          disabled={googleIsLoading || isLoading}
         >
           <div className="bg-white left-[2px] absolute h-[90%] flex items-center justify-center text-2xl aspect-square rounded-sm">
             <FcGoogle className="" />
           </div>
 
           <div className="text-white w-full text-center font-semibold">
-            Sign up with google
+            {googleIsLoading ? (
+              <AiOutlineLoading3Quarters className="text-white mx-auto text-xl animate-spin" />
+            ) : (
+              "  Sign up with google"
+            )}
           </div>
         </Button>
         <div className="text-sm text-center pt-5">
