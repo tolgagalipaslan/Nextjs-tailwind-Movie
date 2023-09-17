@@ -13,7 +13,9 @@ import { BsFillBookmarkPlusFill } from "react-icons/bs";
 import NProgress from "nprogress";
 import { setData } from "@/redux/features/watchList";
 import { useDispatch } from "react-redux";
-const Card = ({ movie, watchListSlice }) => {
+import ToggleFavoriteListItem from "@/utils/toggleFavoritesItem";
+import { setDataFav } from "@/redux/features/favorites";
+const Card = ({ movie, watchListSlice, favoriteListSlice }) => {
   const router = useRouter();
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -34,13 +36,31 @@ const Card = ({ movie, watchListSlice }) => {
       NProgress.done();
     }
   };
+  const handleToggleFavoriteListItem = async () => {
+    try {
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleFavoriteListItem(session?.user?.id, movie);
+      dispatch(setDataFav(res));
+
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
+    }
+  };
 
   const items = [
     {
       label: (
         <div
           onClick={() => handleToggleWatchListItem()}
-          className={`flex items-center gap-1 ${
+          className={`flex items-center gap-1 px-3 py-2 ${
             watchListSlice?.find((i) => i.id === movie?.id)
               ? "text-mainDarkRed"
               : " text-black"
@@ -54,7 +74,14 @@ const Card = ({ movie, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div
+          className={`flex items-center gap-1  px-3 py-2 ${
+            favoriteListSlice?.find((i) => i.id === movie?.id)
+              ? "text-mainDarkRed"
+              : " text-black"
+          }`}
+          onClick={() => handleToggleFavoriteListItem()}
+        >
           <AiFillHeart className="text-lg" />
           Favorites
         </div>
@@ -66,7 +93,7 @@ const Card = ({ movie, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 px-3 py-2">
           <AiFillStar className="text-lg" />
           Your rating
         </div>

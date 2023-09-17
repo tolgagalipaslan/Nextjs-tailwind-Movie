@@ -40,6 +40,10 @@ html {
   border-left-color: #d90429 !important;
 }
 
+.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child {
+  @apply !p-0;
+}
+
 /*
 =========================
   Loading Screen Start

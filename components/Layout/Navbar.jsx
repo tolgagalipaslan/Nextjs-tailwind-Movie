@@ -119,7 +119,10 @@ const Navbar = () => {
   const items = [
     {
       label: (
-        <Link className="flex items-center gap-1 pr-6" href={"/favorites"}>
+        <Link
+          className="flex items-center gap-1 px-3 py-2 pr-6"
+          href={"/favorites"}
+        >
           <AiOutlineHeart className="text-lg" /> Favorites
         </Link>
       ),
@@ -127,7 +130,10 @@ const Navbar = () => {
     },
     {
       label: (
-        <Link className="flex items-center gap-1 pr-6" href={"/watchlist"}>
+        <Link
+          className="flex items-center gap-1 px-3 py-2 pr-6"
+          href={"/watchlist"}
+        >
           <BsBookmarkPlus className="text-lg" /> Watchlist
         </Link>
       ),
@@ -135,7 +141,10 @@ const Navbar = () => {
     },
     {
       label: (
-        <Link className="flex items-center gap-1 pr-6" href={"/settings"}>
+        <Link
+          className="flex items-center gap-1 px-3 py-2 pr-6"
+          href={"/settings"}
+        >
           <FiSettings className="text-lg" /> Settings
         </Link>
       ),
@@ -148,7 +157,7 @@ const Navbar = () => {
       label: (
         <div
           onClick={() => signOut()}
-          className="flex items-center gap-1 cursor-pointer pr-6"
+          className="flex items-center gap-1 px-3 py-2 cursor-pointer pr-6"
         >
           <MdOutlineLogout className="text-lg" /> Logout
         </div>

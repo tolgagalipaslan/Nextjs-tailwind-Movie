@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 
 const Home = ({ artist, movies, tv }) => {
   const watchListSlice = useSelector((state) => state?.watchList?.value);
+  const favoriteListSlice = useSelector((state) => state?.favoriteList?.value);
+
   return (
     <div className=" ">
       <Head>
@@ -18,8 +20,16 @@ const Home = ({ artist, movies, tv }) => {
 
       <div className="flex flex-col pb-10">
         <ArtistList artist={artist} />
-        <PopularMovies watchListSlice={watchListSlice} movies={movies} />
-        <PopularTv watchListSlice={watchListSlice} tv={tv} />
+        <PopularMovies
+          watchListSlice={watchListSlice}
+          favoriteListSlice={favoriteListSlice}
+          movies={movies}
+        />
+        <PopularTv
+          watchListSlice={watchListSlice}
+          favoriteListSlice={favoriteListSlice}
+          tv={tv}
+        />
       </div>
     </div>
   );

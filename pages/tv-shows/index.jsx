@@ -25,6 +25,7 @@ const TvShows = ({ data }) => {
 
   const router = useRouter();
   const watchListSlice = useSelector((state) => state?.watchList?.value);
+  const favoriteListSlice = useSelector((state) => state?.favoriteList?.value);
   // Router.events.on("routeChangeStart", () => {
   //   setMovies(data);
   //   setPage(1);
@@ -133,7 +134,12 @@ const TvShows = ({ data }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  gap-5">
               {tvShows?.map((tv, i) => (
-                <Card watchListSlice={watchListSlice} tv={tv} key={i} />
+                <Card
+                  favoriteListSlice={favoriteListSlice}
+                  watchListSlice={watchListSlice}
+                  tv={tv}
+                  key={i}
+                />
               ))}
             </div>
           )}

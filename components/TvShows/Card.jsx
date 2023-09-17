@@ -1,4 +1,6 @@
+import { setDataFav } from "@/redux/features/favorites";
 import { setData } from "@/redux/features/watchList";
+import ToggleFavoriteListItem from "@/utils/toggleFavoritesItem";
 import ToggleWatchlistItem from "@/utils/toggleWatchlistItem";
 import { Dropdown, Space, message } from "antd";
 import { useSession } from "next-auth/react";
@@ -13,7 +15,7 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 
-const Card = ({ tv, watchListSlice }) => {
+const Card = ({ tv, watchListSlice, favoriteListSlice }) => {
   const router = useRouter();
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -35,11 +37,31 @@ const Card = ({ tv, watchListSlice }) => {
       NProgress.done();
     }
   };
+
+  const handleToggleFavoriteListItem = async () => {
+    try {
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleFavoriteListItem(session?.user?.id, tv);
+      dispatch(setDataFav(res));
+
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
+    }
+  };
+
   const items = [
     {
       label: (
         <div
-          className={`flex items-center gap-1 ${
+          className={`flex items-center gap-1 px-3 py-2 ${
             watchListSlice?.find((i) => i.id === tv?.id)
               ? "text-mainDarkRed"
               : " text-black"
@@ -54,7 +76,14 @@ const Card = ({ tv, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div
+          className={`flex items-center gap-1  px-3 py-2 ${
+            favoriteListSlice?.find((i) => i.id === tv?.id)
+              ? "text-mainDarkRed"
+              : " text-black"
+          }`}
+          onClick={() => handleToggleFavoriteListItem()}
+        >
           <AiFillHeart className="text-lg" />
           Favorites
         </div>
@@ -66,7 +95,7 @@ const Card = ({ tv, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 px-3 py-2">
           <AiFillStar className="text-lg" />
           Your rating
         </div>

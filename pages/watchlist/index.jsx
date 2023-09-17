@@ -69,12 +69,12 @@ export const getServerSideProps = async (context) => {
     const session = await getSession(context);
 
     const res = await axios.get(
-      `http://localhost:3000/api/watchList?queryId=${session?.user?.id}`
+      `${process.env.MAIN_URL}/api/watchList?queryId=${session?.user?.id}`
     );
 
     return {
       props: {
-        data: res?.data?.watchList,
+        data: res?.data?.watchList || [],
       },
     };
   } catch (error) {

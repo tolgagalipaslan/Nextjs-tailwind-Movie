@@ -24,6 +24,7 @@ const Movies = ({ data }) => {
 
   const router = useRouter();
   const watchListSlice = useSelector((state) => state?.watchList?.value);
+  const favoriteListSlice = useSelector((state) => state?.favoriteList?.value);
   // Router.events.on("routeChangeStart", () => {
   //   setMovies(data);
   //   setPage(1);
@@ -132,7 +133,12 @@ const Movies = ({ data }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  gap-5">
               {movies?.map((movie, i) => (
-                <Card watchListSlice={watchListSlice} movie={movie} key={i} />
+                <Card
+                  favoriteListSlice={favoriteListSlice}
+                  watchListSlice={watchListSlice}
+                  movie={movie}
+                  key={i}
+                />
               ))}
             </div>
           )}

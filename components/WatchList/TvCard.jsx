@@ -38,7 +38,7 @@ const TvCard = ({ tv, setWatchList, watchListSlice }) => {
       label: (
         <div
           onClick={() => handleToggleWatchListItem()}
-          className={`flex items-center gap-1 ${
+          className={`flex items-center gap-1 px-3 py-2 ${
             watchListSlice?.find((i) => i.id === tv?.id)
               ? "text-mainDarkRed"
               : " text-black"
@@ -52,7 +52,7 @@ const TvCard = ({ tv, setWatchList, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 px-3 py-2">
           <AiFillHeart className="text-lg" />
           Favorites
         </div>
@@ -64,7 +64,7 @@ const TvCard = ({ tv, setWatchList, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 px-3 py-2">
           <AiFillStar className="text-lg" />
           Your rating
         </div>

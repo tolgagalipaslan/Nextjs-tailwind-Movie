@@ -1,4 +1,6 @@
+import { setDataFav } from "@/redux/features/favorites";
 import { setData } from "@/redux/features/watchList";
+import ToggleFavoriteListItem from "@/utils/toggleFavoritesItem";
 import ToggleWatchlistItem from "@/utils/toggleWatchlistItem";
 import { Button, Tooltip, message } from "antd";
 import { useSession } from "next-auth/react";
@@ -15,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 const Banner = ({ movie, cast, video }) => {
   const [arrow, setArrow] = useState("Show");
   const watchListSlice = useSelector((state) => state?.watchList?.value);
+  const favoriteListSlice = useSelector((state) => state?.favoriteList?.value);
+
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -36,6 +40,26 @@ const Banner = ({ movie, cast, video }) => {
       NProgress.done();
     }
   };
+
+  const handleToggleFavoriteListItem = async () => {
+    try {
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleFavoriteListItem(session?.user?.id, movie);
+      dispatch(setDataFav(res));
+
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
+    }
+  };
+
   const mergedArrow = useMemo(() => {
     if (arrow === "Hide") {
       return false;
@@ -83,7 +107,7 @@ const Banner = ({ movie, cast, video }) => {
 
                 <div className="">{movie?.release_date}</div>
                 <div className="w-1 h-1 rounded-full bg-white "></div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 px-3 py-2">
                   {movie?.genres?.slice(0, 3)?.map((item, i) => (
                     <div key={i}>
                       {item?.name}
@@ -130,8 +154,13 @@ const Banner = ({ movie, cast, video }) => {
               >
                 <Button
                   type="button"
-                  className="text-white bg-mainBlack h-full aspect-square flex items-center justify-center"
                   shape="round"
+                  className={`bg-mainBlack h-full aspect-square flex items-center justify-center ${
+                    favoriteListSlice?.find((i) => i.id === movie?.id)
+                      ? "text-mainDarkRed"
+                      : "text-white"
+                  }`}
+                  onClick={() => handleToggleFavoriteListItem()}
                 >
                   <AiFillHeart />
                 </Button>
