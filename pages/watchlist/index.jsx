@@ -13,7 +13,7 @@ const WatchList = ({ data }) => {
   const [watchList, setWatchList] = useState(data);
   const router = useRouter();
   const watchListSlice = useSelector((state) => state?.watchList?.value);
-
+  const favoriteListSlice = useSelector((state) => state?.favoriteList?.value);
   return (
     <div className="h-fit py-5  w-full min-h-screen     bg-[url('/assets/auth-bg.jpg')] -mt-[65px] pt-[65px]  ">
       <div className="container text-white">
@@ -41,6 +41,7 @@ const WatchList = ({ data }) => {
             {watchList?.map((item, i) =>
               item?.title ? (
                 <Card
+                  favoriteListSlice={favoriteListSlice}
                   watchListSlice={watchListSlice}
                   key={i}
                   movie={item}
@@ -48,6 +49,7 @@ const WatchList = ({ data }) => {
                 />
               ) : (
                 <TvCard
+                  favoriteListSlice={favoriteListSlice}
                   watchListSlice={watchListSlice}
                   key={i}
                   tv={item}

@@ -17,6 +17,7 @@ const Card = ({ movie, setFavorites, watchListSlice, favoriteListSlice }) => {
   const router = useRouter();
   const { data: session } = useSession();
   const dispatch = useDispatch();
+
   const handleToggleWatchListItem = async () => {
     try {
       if (!session) {
@@ -26,7 +27,7 @@ const Card = ({ movie, setFavorites, watchListSlice, favoriteListSlice }) => {
       NProgress.start();
       const res = await ToggleWatchlistItem(session?.user?.id, movie);
       dispatch(setData(res));
-      setFavorites(res);
+
       message.success("The transaction was completed successfully");
     } catch (error) {
       console.log(error);

@@ -10,8 +10,10 @@ import { BsFillBookmarkPlusFill } from "react-icons/bs";
 import NProgress from "nprogress";
 import { setData } from "@/redux/features/watchList";
 import { useDispatch } from "react-redux";
+import ToggleFavoriteListItem from "@/utils/toggleFavoritesItem";
+import { setDataFav } from "@/redux/features/favorites";
 
-const Card = ({ movie, setWatchList, watchListSlice }) => {
+const Card = ({ movie, setWatchList, watchListSlice, favoriteListSlice }) => {
   const router = useRouter();
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -25,6 +27,25 @@ const Card = ({ movie, setWatchList, watchListSlice }) => {
       const res = await ToggleWatchlistItem(session?.user?.id, movie);
       dispatch(setData(res));
       setWatchList(res);
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
+    }
+  };
+
+  const handleToggleFavoriteListItem = async () => {
+    try {
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleFavoriteListItem(session?.user?.id, movie);
+      dispatch(setDataFav(res));
+
       message.success("The transaction was completed successfully");
     } catch (error) {
       console.log(error);
@@ -52,7 +73,14 @@ const Card = ({ movie, setWatchList, watchListSlice }) => {
     },
     {
       label: (
-        <div className="flex items-center gap-1 px-3 py-2">
+        <div
+          className={`flex items-center gap-1  px-3 py-2 ${
+            favoriteListSlice?.find((i) => i.id === movie?.id)
+              ? "text-mainDarkRed"
+              : " text-black"
+          }`}
+          onClick={() => handleToggleFavoriteListItem()}
+        >
           <AiFillHeart className="text-lg" />
           Favorites
         </div>
