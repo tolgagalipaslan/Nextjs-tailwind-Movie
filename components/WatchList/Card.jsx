@@ -1,20 +1,19 @@
-import { setData } from "@/redux/features/watchList";
 import ToggleWatchlistItem from "@/utils/toggleWatchlistItem";
 import { Button, Dropdown, Space, message } from "antd";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import NProgress from "nprogress";
 import React from "react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
+import NProgress from "nprogress";
+import { setData } from "@/redux/features/watchList";
 import { useDispatch } from "react-redux";
 
-const Card = ({ movie, watchListSlice }) => {
-  const { data: session } = useSession();
+const Card = ({ movie, setWatchList, watchListSlice }) => {
   const router = useRouter();
+  const { data: session } = useSession();
   const dispatch = useDispatch();
   const handleToggleWatchListItem = async () => {
     try {
@@ -25,7 +24,7 @@ const Card = ({ movie, watchListSlice }) => {
       NProgress.start();
       const res = await ToggleWatchlistItem(session?.user?.id, movie);
       dispatch(setData(res));
-
+      setWatchList(res);
       message.success("The transaction was completed successfully");
     } catch (error) {
       console.log(error);
@@ -38,12 +37,12 @@ const Card = ({ movie, watchListSlice }) => {
     {
       label: (
         <div
+          onClick={() => handleToggleWatchListItem()}
           className={`flex items-center gap-1 ${
             watchListSlice?.find((i) => i.id === movie?.id)
               ? "text-mainDarkRed"
               : " text-black"
           }`}
-          onClick={() => handleToggleWatchListItem()}
         >
           <BsFillBookmarkPlusFill className="text-lg" />
           Watchlist
@@ -83,7 +82,7 @@ const Card = ({ movie, watchListSlice }) => {
             items,
           }}
           trigger={["click"]}
-          className="group-hover:opacity-100 opacity-0 select-none"
+          className="group-hover:opacity-100 opacity-0  select-none"
         >
           <div onClick={(e) => e.preventDefault()}>
             <Space className="bg-white/80 text-2xl rounded-full  hover:bg-blue-600 duration-300  ">

@@ -1,29 +1,37 @@
+import ToggleWatchlistItem from "@/utils/toggleWatchlistItem";
 import { Dropdown, Space, message } from "antd";
-import axios from "axios";
+
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
+
 import { useRouter } from "next/router";
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
-const Card = ({ movie }) => {
+import NProgress from "nprogress";
+import { setData } from "@/redux/features/watchList";
+import { useDispatch } from "react-redux";
+const Card = ({ movie, watchListSlice }) => {
   const router = useRouter();
   const { data: session } = useSession();
-
-  const handleAddWatchListItem = async () => {
+  const dispatch = useDispatch();
+  const handleToggleWatchListItem = async () => {
     try {
-      const res = await axios.post(`/api/watchList`, {
-        userId: session?.user?.id,
-        item: movie,
-      });
-      console.log(res?.data?.watchList);
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleWatchlistItem(session?.user?.id, movie);
+      dispatch(setData(res));
       message.success("The transaction was completed successfully");
     } catch (error) {
       console.log(error);
       message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
     }
   };
 
@@ -31,8 +39,12 @@ const Card = ({ movie }) => {
     {
       label: (
         <div
-          onClick={() => handleAddWatchListItem()}
-          className="flex items-center gap-1"
+          onClick={() => handleToggleWatchListItem()}
+          className={`flex items-center gap-1 ${
+            watchListSlice?.find((i) => i.id === movie?.id)
+              ? "text-mainDarkRed"
+              : " text-black"
+          }`}
         >
           <BsFillBookmarkPlusFill className="text-lg" />
           Watchlist
@@ -70,7 +82,7 @@ const Card = ({ movie }) => {
             items,
           }}
           trigger={["click"]}
-          className="group-hover:opacity-100 opacity-0"
+          className="group-hover:opacity-100 opacity-0  select-none"
         >
           <div onClick={(e) => e.preventDefault()}>
             <Space className="bg-white/80 text-2xl rounded-full hover:bg-blue-600 duration-300  ">

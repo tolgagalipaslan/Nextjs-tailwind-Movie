@@ -1,13 +1,41 @@
-import { Button, Tooltip } from "antd";
+import { setData } from "@/redux/features/watchList";
+import ToggleWatchlistItem from "@/utils/toggleWatchlistItem";
+import { Button, Tooltip, message } from "antd";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import NProgress from "nprogress";
 import React, { useMemo, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
-import { BsFillPlayFill } from "react-icons/bs";
+import { BsFillBookmarkPlusFill, BsFillPlayFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 const Banner = ({ tv, cast, video }) => {
   const [arrow, setArrow] = useState("Show");
+  const watchListSlice = useSelector((state) => state?.watchList?.value);
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const handleToggleWatchListItem = async () => {
+    try {
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleWatchlistItem(session?.user?.id, tv);
+      dispatch(setData(res));
+
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
+    }
+  };
   const mergedArrow = useMemo(() => {
     if (arrow === "Hide") {
       return false;
@@ -120,6 +148,25 @@ const Banner = ({ tv, cast, video }) => {
                   shape="round"
                 >
                   <AiFillStar />
+                </Button>
+              </Tooltip>{" "}
+              <Tooltip
+                color="#2b2d42"
+                placement="bottom"
+                title={"WatchList"}
+                arrow={mergedArrow}
+              >
+                <Button
+                  type="button"
+                  onClick={() => handleToggleWatchListItem()}
+                  className={` bg-mainBlack h-full aspect-square flex items-center justify-center ${
+                    watchListSlice?.find((i) => i.id === tv?.id)
+                      ? "text-mainDarkRed"
+                      : " text-white"
+                  }`}
+                  shape="round"
+                >
+                  <BsFillBookmarkPlusFill />
                 </Button>
               </Tooltip>
               {video?.length !== 0 ? (

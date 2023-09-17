@@ -4,8 +4,10 @@ import PopularMovies from "@/components/Home/PopularMovies";
 import PopularTv from "@/components/Home/PopularTv";
 import axios from "axios";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 
 const Home = ({ artist, movies, tv }) => {
+  const watchListSlice = useSelector((state) => state?.watchList?.value);
   return (
     <div className=" ">
       <Head>
@@ -16,8 +18,8 @@ const Home = ({ artist, movies, tv }) => {
 
       <div className="flex flex-col pb-10">
         <ArtistList artist={artist} />
-        <PopularMovies movies={movies} />
-        <PopularTv tv={tv} />
+        <PopularMovies watchListSlice={watchListSlice} movies={movies} />
+        <PopularTv watchListSlice={watchListSlice} tv={tv} />
       </div>
     </div>
   );

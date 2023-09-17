@@ -9,6 +9,7 @@ import { Router, useRouter } from "next/router";
 import SideBar from "@/components/TvShows/SideBar";
 import Card from "@/components/TvShows/Card";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 
 const TvShows = ({ data }) => {
   const [tvShows, setTvShows] = useState(data);
@@ -23,7 +24,7 @@ const TvShows = ({ data }) => {
   const [hideLoadBtn, setHideLoadBtn] = useState(false);
 
   const router = useRouter();
-
+  const watchListSlice = useSelector((state) => state?.watchList?.value);
   // Router.events.on("routeChangeStart", () => {
   //   setMovies(data);
   //   setPage(1);
@@ -132,7 +133,7 @@ const TvShows = ({ data }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  gap-5">
               {tvShows?.map((tv, i) => (
-                <Card tv={tv} key={i} />
+                <Card watchListSlice={watchListSlice} tv={tv} key={i} />
               ))}
             </div>
           )}

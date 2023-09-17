@@ -10,7 +10,7 @@ import { Navigation } from "swiper/modules";
 import Title from "../ui/Title";
 import TvCard from "./TvCard";
 
-const PopularTv = ({ tv }) => {
+const PopularTv = ({ tv, watchListSlice }) => {
   return (
     <div className="overflow-hidden">
       <div className="container">
@@ -50,7 +50,7 @@ const PopularTv = ({ tv }) => {
             (tv, i) =>
               tv?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <TvCard tv={tv} />
+                  <TvCard watchListSlice={watchListSlice} tv={tv} />
                 </SwiperSlide>
               )
           )}{" "}
@@ -58,7 +58,7 @@ const PopularTv = ({ tv }) => {
             (tv, i) =>
               tv?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <TvCard tv={tv} />
+                  <TvCard watchListSlice={watchListSlice} tv={tv} />
                 </SwiperSlide>
               )
           )}{" "}
@@ -66,7 +66,7 @@ const PopularTv = ({ tv }) => {
             (tv, i) =>
               tv?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <TvCard tv={tv} />
+                  <TvCard watchListSlice={watchListSlice} tv={tv} />
                 </SwiperSlide>
               )
           )}

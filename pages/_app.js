@@ -6,6 +6,10 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useEffect, useState } from "react";
 import { SessionProvider } from "next-auth/react";
+
+import { Provider, useDispatch } from "react-redux";
+import { store } from "@/redux/store";
+
 //Page loading animation
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -20,16 +24,21 @@ export default function App({ Component, pageProps, session }) {
       setLoading(false);
     }, 1000);
   }, []);
+
   return (
     <SessionProvider session={session}>
-      <div
-        className={`${loading ? "overflow-hidden h-screen max-h-screen" : ""}`}
-      >
-        <Layout>
-          <Component {...pageProps} />
-          <Loading loading={loading} />
-        </Layout>
-      </div>
+      <Provider store={store}>
+        <div
+          className={`${
+            loading ? "overflow-hidden h-screen max-h-screen" : ""
+          }`}
+        >
+          <Layout>
+            <Component {...pageProps} />
+            <Loading loading={loading} />
+          </Layout>
+        </div>
+      </Provider>
     </SessionProvider>
   );
 }

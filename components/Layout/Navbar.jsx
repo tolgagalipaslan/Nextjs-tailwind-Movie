@@ -236,6 +236,7 @@ const Navbar = () => {
                   items,
                 }}
                 trigger={["click"]}
+                className=" select-none"
                 arrow
               >
                 <a onClick={(e) => e.preventDefault()}>

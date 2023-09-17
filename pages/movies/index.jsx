@@ -9,6 +9,7 @@ import { Router, useRouter } from "next/router";
 import Card from "@/components/Movies/Card";
 import SideBar from "@/components/Movies/SideBar";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 const Movies = ({ data }) => {
   const [movies, setMovies] = useState(data);
   const [page, setPage] = useState(1);
@@ -22,7 +23,7 @@ const Movies = ({ data }) => {
   const [hideLoadBtn, setHideLoadBtn] = useState(false);
 
   const router = useRouter();
-
+  const watchListSlice = useSelector((state) => state?.watchList?.value);
   // Router.events.on("routeChangeStart", () => {
   //   setMovies(data);
   //   setPage(1);
@@ -131,7 +132,7 @@ const Movies = ({ data }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  gap-5">
               {movies?.map((movie, i) => (
-                <Card movie={movie} key={i} />
+                <Card watchListSlice={watchListSlice} movie={movie} key={i} />
               ))}
             </div>
           )}

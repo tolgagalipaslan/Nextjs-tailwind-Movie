@@ -1,15 +1,39 @@
-import { Avatar, Button, Dropdown, Space, Tag } from "antd";
+import { setData } from "@/redux/features/watchList";
+import ToggleWatchlistItem from "@/utils/toggleWatchlistItem";
+import { Avatar, Button, Dropdown, Space, Tag, message } from "antd";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import NProgress from "nprogress";
 
 import React from "react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsFillBookmarkPlusFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 
-const TvCard = ({ tv }) => {
+const TvCard = ({ tv, watchListSlice }) => {
   const router = useRouter();
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+  const handleToggleWatchListItem = async () => {
+    try {
+      if (!session) {
+        router.push("/auth/login");
+        return;
+      }
+      NProgress.start();
+      const res = await ToggleWatchlistItem(session?.user?.id, tv);
+      dispatch(setData(res));
 
+      message.success("The transaction was completed successfully");
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      NProgress.done();
+    }
+  };
   const filmGenres = [
     { id: 28, name: "Action", color: "#f50" },
     { id: 12, name: "Adventure", color: "#00ccff" }, // Zıt renk: Mavi
@@ -36,7 +60,14 @@ const TvCard = ({ tv }) => {
   const items = [
     {
       label: (
-        <div className="flex items-center gap-1">
+        <div
+          onClick={() => handleToggleWatchListItem()}
+          className={`flex items-center gap-1 ${
+            watchListSlice?.find((i) => i.id === tv?.id)
+              ? "text-mainDarkRed"
+              : " text-black"
+          }`}
+        >
           <BsFillBookmarkPlusFill className="text-lg" />
           Watchlist
         </div>
@@ -74,7 +105,7 @@ const TvCard = ({ tv }) => {
             items,
           }}
           trigger={["click"]}
-          className="group-hover:opacity-100 opacity-0"
+          className="group-hover:opacity-100 opacity-0  select-none"
         >
           <div onClick={(e) => e.preventDefault()}>
             <Space className="bg-white/80 text-2xl rounded-full hover:bg-blue-600 duration-300  ">

@@ -1,10 +1,11 @@
+import dbConnect from "@/lib/dbConnect";
 import User from "@/models/User";
 
 const handler = async (req, res) => {
   const { method } = req;
   const { queryId } = req.query;
   const { userId, item } = req.body;
-
+  await dbConnect();
   if (method === "GET") {
     const user = await User.findById(queryId);
 

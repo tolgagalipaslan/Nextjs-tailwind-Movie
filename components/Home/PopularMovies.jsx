@@ -10,7 +10,7 @@ import { Navigation } from "swiper/modules";
 import Title from "../ui/Title";
 import MovieCard from "./MovieCard";
 
-const PopularMovies = ({ movies }) => {
+const PopularMovies = ({ movies, watchListSlice }) => {
   return (
     <div className="overflow-hidden">
       <div className="container">
@@ -50,7 +50,7 @@ const PopularMovies = ({ movies }) => {
             (movie, i) =>
               movie?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <MovieCard movie={movie} />
+                  <MovieCard watchListSlice={watchListSlice} movie={movie} />
                 </SwiperSlide>
               )
           )}
@@ -58,7 +58,7 @@ const PopularMovies = ({ movies }) => {
             (movie, i) =>
               movie?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <MovieCard movie={movie} />
+                  <MovieCard watchListSlice={watchListSlice} movie={movie} />
                 </SwiperSlide>
               )
           )}
@@ -66,7 +66,7 @@ const PopularMovies = ({ movies }) => {
             (movie, i) =>
               movie?.backdrop_path && (
                 <SwiperSlide key={i}>
-                  <MovieCard movie={movie} />
+                  <MovieCard watchListSlice={watchListSlice} movie={movie} />
                 </SwiperSlide>
               )
           )}
