@@ -67,7 +67,7 @@ const Register = () => {
   };
 
   return (
-    <div className='h-screen w-full bg-[url("/assets/auth-bg.jpg")] bg-cover bg-center flex items-center justify-center p-3'>
+    <div className='min-h-screen h-fit w-full bg-[url("/assets/auth-bg.jpg")] bg-cover bg-center flex items-center justify-center p-3 py-20'>
       <Head>
         <title>Register</title>
       </Head>
@@ -75,8 +75,10 @@ const Register = () => {
         <BiArrowBack onClick={() => router.back()} />
       </Button>
 
-      <div className="bg-white p-10">
-        <div className="text-center font-semibold text-4xl">Register</div>
+      <div className="bg-mainBlack/30 backdrop-blur-md p-10">
+        <div className="text-center font-semibold text-4xl text-white">
+          Register
+        </div>
         <Form
           name="basic"
           layout="vertical"
@@ -84,7 +86,7 @@ const Register = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Username"
+            label={<label className="text-white">Username</label>}
             name="username"
             rules={[
               {
@@ -99,7 +101,7 @@ const Register = () => {
             />
           </Form.Item>
           <Form.Item
-            label="Email"
+            label={<label className="text-white">Email</label>}
             name="email"
             hasFeedback
             validateStatus={emailIsValid}
@@ -122,7 +124,7 @@ const Register = () => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label={<label className="text-white">Password</label>}
             name="password"
             rules={[
               {
@@ -152,7 +154,9 @@ const Register = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Divider plain>Or</Divider>
+        <Divider className="text-white" plain>
+          Or
+        </Divider>
         <Button
           htmltype="button"
           onClick={() => googleAuth()}
@@ -172,7 +176,7 @@ const Register = () => {
             )}
           </div>
         </Button>
-        <div className="text-sm text-center pt-5">
+        <div className="text-sm text-center pt-5 text-white">
           You have an account?{" "}
           <Link href={"/auth/login"} className="text-blue-500 underline">
             Sing in

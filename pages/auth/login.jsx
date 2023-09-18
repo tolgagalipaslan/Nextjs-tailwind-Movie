@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className='h-screen w-full bg-[url("/assets/auth-bg.jpg")] bg-cover bg-center flex items-center justify-center p-3'>
+    <div className='min-h-screen h-fit w-full bg-[url("/assets/auth-bg.jpg")] bg-cover bg-center flex items-center justify-center p-3 py-20'>
       <Head>
         <title>Login</title>
       </Head>
@@ -54,8 +54,10 @@ const Login = () => {
         <BiArrowBack onClick={() => router.back()} />
       </Button>
 
-      <div className="bg-white p-10">
-        <div className="text-center font-semibold text-4xl">Login</div>
+      <div className="bg-mainBlack/30 backdrop-blur-md p-10">
+        <div className="text-center font-semibold text-4xl text-white">
+          Login
+        </div>
         <Form
           name="basic"
           layout="vertical"
@@ -63,8 +65,9 @@ const Login = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Email"
+            label={<label className="text-white">Email</label>}
             name="email"
+            className="!text-white"
             rules={[
               {
                 type: "email",
@@ -80,7 +83,7 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label={<label className="text-white">Password</label>}
             name="password"
             rules={[
               {
@@ -110,7 +113,9 @@ const Login = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Divider plain>Or</Divider>
+        <Divider className="text-white" plain>
+          Or
+        </Divider>
         <Button
           htmltype="button"
           onClick={() => {
@@ -132,7 +137,7 @@ const Login = () => {
             )}
           </div>
         </Button>
-        <div className="text-sm text-center pt-5">
+        <div className="text-sm text-center pt-5 text-white">
           Dont have an account?{" "}
           <Link href={"/auth/register"} className="text-blue-500 underline">
             Sign up

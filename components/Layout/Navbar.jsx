@@ -271,7 +271,7 @@ const Navbar = () => {
                 <Button
                   onClick={() => router.push("/auth/register")}
                   type="link"
-                  className="bg-emerald-500 text-white"
+                  className="bg-emerald-500 lg:flex hidden text-white"
                 >
                   Sing up
                 </Button>
