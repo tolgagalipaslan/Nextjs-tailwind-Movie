@@ -90,7 +90,7 @@ const Banner = ({ movie, cast, video }) => {
               src={`${
                 movie?.poster_path !== null
                   ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.poster_path}`
-                  : movie?.backdrop_path === null
+                  : movie?.backdrop_path !== null
                   ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie?.backdrop_path}`
                   : "/assets/default-img.png"
               }`}
@@ -125,23 +125,35 @@ const Banner = ({ movie, cast, video }) => {
                       ? "#21d07a"
                       : movie?.vote_average > 4
                       ? "#d2d531"
+                      : movie?.vote_average === 0
+                      ? "#838383"
                       : "#db2360 ",
                   pathColor:
                     movie?.vote_average > 7
                       ? "#21d07a"
                       : movie?.vote_average > 4
                       ? "#d2d531"
+                      : movie?.vote_average === 0
+                      ? "#838383"
                       : "#db2360 ",
                   trailColor:
                     movie?.vote_average > 7
                       ? "#204529"
                       : movie?.vote_average > 4
                       ? "#423d0f"
+                      : movie?.vote_average === 0
+                      ? "#838383"
                       : "#571435 ",
                 })}
                 className="w-20 bg-mainBlack2 p-2 rounded-full font-semibold"
-                value={movie?.vote_average * 10}
-                text={`${(movie?.vote_average * 10).toString()?.slice(0, 5)}%`}
+                value={
+                  movie?.vote_average === 0 ? "NR" : movie?.vote_average * 10
+                }
+                text={`${
+                  movie?.vote_average === 0
+                    ? "NR"
+                    : (movie?.vote_average * 10).toString()?.slice(0, 5) + "%"
+                }`}
               />
               <div className="font-semibold text-xl">
                 User <br /> Score

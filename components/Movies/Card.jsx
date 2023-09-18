@@ -168,8 +168,12 @@ const Card = ({ movie, watchListSlice, favoriteListSlice }) => {
                 : "#571435 ",
           })}
           className="w-14 h-14  items-center justify-center bg-mainBlack2 p-1 rounded-full font-semibold hidden sm:flex absolute -bottom-7 right-3 z-20"
-          value={movie?.vote_average * 10}
-          text={`${(movie?.vote_average * 10).toString()?.slice(0, 5)}%`}
+          value={movie?.vote_average === 0 ? "NR" : movie?.vote_average * 10}
+          text={`${
+            movie?.vote_average === 0
+              ? "NR"
+              : (movie?.vote_average * 10).toString()?.slice(0, 5) + "%"
+          }`}
         />
       </div>
 
