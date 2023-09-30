@@ -1,13 +1,12 @@
 import Banner from "@/components/MovieDetails/Banner";
 import CastList from "@/components/MovieDetails/CastList";
-import Comments from "@/components/MovieDetails/Comments";
+
 import Trailer from "@/components/MovieDetails/Trailer";
 import axios from "axios";
 import Head from "next/head";
 import React, { useState } from "react";
 
-const MovieDetails = ({ movie, cast, video, commentsData }) => {
-  const [comments, setComments] = useState(commentsData);
+const MovieDetails = ({ movie, cast, video }) => {
   return (
     <div className=" ">
       <Head>
@@ -19,7 +18,6 @@ const MovieDetails = ({ movie, cast, video, commentsData }) => {
 
       <CastList cast={cast} />
       <Trailer video={video} cast={cast} />
-      <Comments movie={movie} comments={comments} setComments={setComments} />
     </div>
   );
 };
@@ -42,16 +40,11 @@ export const getServerSideProps = async (context) => {
       `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
     );
 
-    const comments = await axios.get(
-      `${process.env.MAIN_URL}/api/comment?contentId=${populatedMovieRes?.data?.id}`
-    );
-
     return {
       props: {
         movie: populatedMovieRes?.data,
         cast: castAndCrewRes?.data,
         video: videoRes?.data?.results,
-        commentsData: comments?.data?.comments,
       },
     };
   } catch (error) {
@@ -61,7 +54,6 @@ export const getServerSideProps = async (context) => {
         movie: [],
         cast: [],
         video: [],
-        commentsData: [],
       },
     };
   }

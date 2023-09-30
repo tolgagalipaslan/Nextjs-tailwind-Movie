@@ -1,6 +1,6 @@
 import Banner from "@/components/TvDetails/Banner";
 import CastList from "@/components/TvDetails/CastList";
-import Comments from "@/components/TvDetails/Comments";
+
 import Trailer from "@/components/TvDetails/Trailer";
 import axios from "axios";
 import Head from "next/head";
@@ -17,7 +17,6 @@ const TvDetails = ({ tv, cast, video }) => {
       <Banner video={video} tv={tv} cast={cast} />
       <CastList cast={cast} />
       <Trailer video={video} cast={cast} />
-      <Comments />
     </div>
   );
 };
