@@ -22,8 +22,8 @@ function Footer() {
     pathname === "/auth/login" ||
     pathname === "/auth/register";
   return (
-    <div className={`bg-gray-800 text-white ${hideFooter ? "hidden" : ""} `}>
-      <section className="container py-10">
+    <div className={`bg-gray-800 text-white ${hideFooter ? "hidden" : ""}  mt-5`}>
+      {/* <section className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
           <div className="mb-4">
             <Link href={"/"} className="flex items-center gap-2">
@@ -119,7 +119,7 @@ function Footer() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <div className="bg-mainBlack2">
         <div className="flex container items-center justify-between">
