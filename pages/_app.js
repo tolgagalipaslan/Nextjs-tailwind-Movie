@@ -9,6 +9,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { Provider, useDispatch } from "react-redux";
 import { store } from "@/redux/store";
+import AdminLayout from "@/components/Layout/AdminLayout";
 
 //Page loading animation
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -17,14 +18,22 @@ Router.events.on("routeChangeError", () => NProgress.done());
 
 export default function App({ Component, pageProps, session }) {
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
+  const is_admin = router.pathname.startsWith("/admin");
   useEffect(() => {
     // Sayfa ilk yüklendiğinde loading ekranını gizle
     setInterval(() => {
       setLoading(false);
     }, 1000);
   }, []);
+  let LayoutSwipper;
+  if (is_admin) {
 
+    LayoutSwipper = AdminLayout;
+   
+  } else {
+    LayoutSwipper = Layout;
+  }
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
@@ -33,10 +42,10 @@ export default function App({ Component, pageProps, session }) {
             loading ? "overflow-hidden h-screen max-h-screen" : ""
           }`}
         >
-          <Layout>
+          <LayoutSwipper>
             <Component {...pageProps} />
             <Loading loading={loading} />
-          </Layout>
+          </LayoutSwipper>
         </div>
       </Provider>
     </SessionProvider>
